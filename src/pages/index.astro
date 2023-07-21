@@ -1,30 +1,104 @@
 ---
-import Base from '@layouts/Base.astro';
-import Card from '../components/Card.astro';
+import Base from "@layouts/Base.astro";
+import Card from "../components/Card.astro";
+import { Image, Picture } from "@astrojs/image/components";
+import elasticLogo from "@images/elastic-logo-cluster.svg";
+import chefLogo from "@images/chef-logo.svg";
+import rocket from "@images/rocket.svg";
+import rkLogo from "@images/rk-logo.svg";
+import ryan from "@images/ryan-transparent.png";
 ---
 
 <Base title="Ryan Keairns. You should probably close some tabs.">
-	<main>
-		<h1>Ryan Keairns</h1>
-		<p>It ain't much, but it's an honest website.</p>
-	</main>
+  <nav>
+		<div class="brand">
+			<Image src={rkLogo} alt="ryan keairns logo" />
+			<h1>Ryan Keairns</h1>
+		</div>
+    <ul>
+			<li><a href="#">GitHub</a></li>
+			<li><a href="#">LinkedIn</a></li>
+			<li><a href="#">Mastodon</a></li>
+		</ul>
+  </nav>
+  <header>
+		<Picture
+			widths={[200, 400, 800]}
+			aspectRatio="1:1"
+			src={ryan}
+			alt="Profile picture of Ryan Keairns"
+		/> 
+		<div class="header-text">
+			<h1>Welcome</h1>
+			<h2>Learn more about me &hellip; if you dare.</h2>
+		</div>
+  </header>
+  <main class="cards">
+		<section class="flair-1 double-wide">
+			<h4>About</h4>
+			<h2>Profile</h2>
+			<p>My current title is Senior Design Manager at Elastic, where I lead teams consisting of product designers, design system engineers, and other managers. Day-to-day responsibilites move between Manager, Director, Principal Designer, and UX Architect.</p>
+			<p>I consider myself a team player who seeks areas of need and impact. If I have a niche, it could be described as design leader for technical products built on Open Source.</p>
+			<p>Midwesterner. Now residing in sunny Seattle with my wife, two teenagers, and three cats.</p>
+		</section>
+		<section>
+			<h4>About</h4>
+			<h2>Skills</h2>
+			<ul>
+				<li>Principal Designer</li>
+				<li>Design Manager</li>
+				<li>Design Systems</li>
+				<li>UX Architect</li>
+				<li>Glue Person</li>
+				<li>Research</li>
+				<li>HTML &#x2665;</li>
+				<li>CSS &#x2665;</li>
+			</ul>
+		</section>
+		<section class="emp-badge emp-elastic">
+			<div class="card-notch"></div>
+			<h4>Employer</h4>
+			<h2>Elastic</h2>
+				<p>2018 - Present</p>
+				<div class="sticker"><Image src={elasticLogo} alt="Elastic.co logo" /></div>
+				<div class="overlay"><a target="_blank" href="https://linkedin.com/in/ryan-keairns">View on LinkedIn</a></div>
+			</section>
+		<section class="flair-1 double-wide">
+			<h4>Experience</h4>
+			<h2>Kibana</h2>
+			<p>Directly and indirectly, I have contributed to the user experience of <a target="_blank" href="https://www.elastic.co/kibana/">Kibana</a> in many ways. As both a leader and individual contributor of the Platform UX team, we contribute design, research, and frontend code to the most-used portions of Elastic's web products.</p>
+			<p>Our team is proud to work on core experiences such as Discover, Dashboard, Lens, and Cloud, and a variety of global UIs such as navigation.</p>
+			<p>With a hat tip to past coworkers, we also support the ongoing design and development of the highly-successful <a href="https://elastic.github.io/eui/#/">Elastic UI (EUI) design system.</a></p>
+			<p>Elastic works in the open. For a peek into what design is like here, you can check out my <a href="https://github.com/elastic/kibana/issues?q=is%3Aissue%2Cpr+commenter%3Aryankeairns">GitHub issue activty</a>.</p>
+		</section>
+		<section class="full-width note">
+			<p>For a deeper dive into my work, <a href="mailto:contactryank@gmail.com">email me</a>. I love to talk shop.</p>
+		</section>
+		<section class="emp-badge emp-chef">
+			<div class="card-notch"></div>
+			<h4>Employer</h4>
+			<h2>Chef</h2>
+			<p>2016 - 2018</p>
+			<div class="sticker"><Image src={chefLogo} alt="chef.io logo" /></div>
+			<div class="overlay">some stuff</div>
+		</section>
+		<section class="emp-badge emp-startups">
+			<div class="card-notch"></div>
+			<h4>Employer</h4>
+			<h2>Startups</h2>
+			<p>2012-2016</p>
+			<div class="sticker"><Image src={rocket} alt="HLT logo" /></div>
+			<div class="overlay">some stuff</div>
+		</section>
+		<section>
+			<h4>Experience</h4>
+			<h2>Case studies</h2>
+			<p>A while back, I prepared two in-depth case studies covering everything from sketches and research on through design, metric tracking, and iteration that demonstrated how my work moved the needle.</p>
+			<p>These were some of my favorite experiences in product design, and I am happy to share them upon request.</p>
+		</section>
+		<section class="full-width note">
+			<p>My experience goes back another 10+ years covering frontend and backend development.</p>
+			<p>The former set the course while the latter has not been missed.</p>
+		</section>
+  </main>
 </Base>
-
-<style>
-	body {
-		margin: 0;
-	}
-	main {
-		border-left: 4rem solid red;
-		padding: 1.5rem;
-		/* max-width: 60ch; */
-	}
-	h1 {
-		font-size: 8rem;
-		font-weight: 800;
-		line-height: 1em;
-		margin: 0;
-		text-transform: uppercase;
-		word-spacing: 100vw;
-	}
-</style>
