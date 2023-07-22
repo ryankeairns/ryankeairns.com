@@ -20,6 +20,7 @@
   --size-s: calc(var(--size) * .5);
   --size-l: calc(var(--size) * 1.5);
   --size-xl: calc(var(--size) * 2);
+  --size-xxl: calc(var(--size) * 2.5);
   --height-masthead: calc(var(--size) * 20);
 
   /* Typpgraphy */
@@ -37,13 +38,10 @@
 
 html {
   background-color: var(--color-body);
-  /* background-image: linear-gradient(to right top, #d16ba5, #c777b9, #ba83ca, #aa8fd8, #9a9ae1, #8aa7ec, #79b3f4, #69bff8, #52cffe, #41dfff, #46eefa, #5ffbf1); */
-  /* background-image: linear-gradient(to right top, #8bcc92, #9ad28f, #a9d78c, #b9dc8a, #cae188, #c7e68d, #c4eb93, #c1f099, #a7f5ac, #8df8c3, #74fada, #5ffbf1); */
-  /* background-image: linear-gradient(to right, #ffffff, #f6f3fd, #efe7fa, #eadaf6, #e7cdf1, #deccf6, #d3cbfb, #c6cbff, #a6d8ff, #7fe6ff, #5ef2ff, #5ffbf1); */
   /* background-image: linear-gradient(to right bottom, #ffffff 50%, #eeffff, #caffff, #c1ffe8 80%, #e8ffb5); */
-  background-image: linear-gradient(to right bottom, #ffffff 40%, #f8f8f8, #f2f2f2, #ebebeb, #e5e5e5);
+  background-image: linear-gradient(to right bottom, #ffffff 22%, #f8f8f8, #f2f2f2, #ebebeb, #e5e5e5);
   color: var(--color-font);
-  font-family: system-ui, sans-serif;
+  font-family: -apple-system, BlinkMacSystemFont, avenir next, avenir, segoe ui, helvetica neue, helvetica, Cantarell, Ubuntu, roboto, noto, arial, sans-serif;
   font-size: var(--fs);
   font-weight: var(--fw);
 }
@@ -58,7 +56,7 @@ h1 {
 }
 
 h2 {
-  margin-bottom: var(--fs-xl);
+  margin-bottom: var(--fs-l);
 }
 
 h4 {
@@ -68,6 +66,10 @@ h4 {
 
 p {
   margin-bottom: var(--size);
+}
+
+p:last-child {
+  margin-bottom: 0;
 }
 
 a {
@@ -181,9 +183,9 @@ main {
 
 footer {
   color: var(--color-font-subdued);
-  padding: var(--size-xl);
+  padding: var(--size);
   font-size: var(--fs-s);
-  /* text-align: center; */
+  text-align: center;
 }
 
 footer p {
@@ -196,7 +198,7 @@ footer p {
   border-radius: var(--size-l);
   /* flex: 0 360px; */
   /* width: 100%; */
-  padding: var(--size-xl);
+  padding: var(--size-xxl);
   box-shadow: var(--box-shadow);
   text-align: ;
 }
@@ -357,6 +359,10 @@ section.note {
 
   .note p {
     margin-bottom: 0;
+  }
+
+  footer {
+    text-align: left;
   }
 }
 
