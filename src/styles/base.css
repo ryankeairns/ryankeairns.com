@@ -5,10 +5,10 @@
 
 :root {
   /* Colors */
-  --color-body: ghostwhite;
+  --color-body: #FDFDFD;
   --color-shadow: rgba(0,0,0, 0.04);
 	--color-font: #222;
-	--color-font-subdued: dimgray;
+	--color-font-subdued: gray;
   --color-link: royalblue;
 
   /* --box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px; */
@@ -94,7 +94,7 @@ code {
 
 nav {
   background-color: var(--color-font);
-  color: white;
+  color: var(--color-body);
   padding: var(--size-s) var(--size-xl);
   display: flex;
   justify-content: space-between;
@@ -130,7 +130,7 @@ nav ul {
 }
 
 nav li a {
-  color: white;
+  color: var(--color-body);
 }
 
 header {
@@ -193,17 +193,17 @@ footer p {
 }
 
 .cards > section {
-  background-color: white;
+  background-color: var(--color-body);
   /* backdrop-filter: blur(10px); */
   border-radius: var(--size-l);
   /* flex: 0 360px; */
   /* width: 100%; */
   padding: var(--size-xxl);
   box-shadow: var(--box-shadow);
-  text-align: ;
 }
 
 .cards > section.emp-badge {
+  border: none;
   color: var(--color-body);
   position: relative;
   text-align: center;
@@ -223,7 +223,7 @@ footer p {
 
 .cards > section.emp-badge h4 {
   color: var(--color-body);
-  opacity: .6;
+  opacity: .7;
 }
 
 .cards > section.emp-badge .overlay {
@@ -253,15 +253,17 @@ footer p {
 
 .cards > section.emp-elastic {
   background-color: #20377D;
-  color: var(--color-body)
+  color: ghostwhite;
 }
 
 .cards > section.emp-chef {
   background-color: #435363;
+  color: ghostwhite;
 }
 
-.cards > section.emp-chef h4 {
-  color: var(--color-body);
+.cards > section.emp-chef h4,
+.cards > section.emp-elastic h4 {
+  color: ghostwhite;
 }
 
 .cards > section.emp-startups {
@@ -291,6 +293,7 @@ footer p {
 }
 
 .cards > section h4 {
+  color: var(--color-font-subdued);
   font-size: var(--fs-xs);
 }
 
@@ -304,7 +307,7 @@ footer p {
 
 section.note {
   background-color: transparent;
-  border: 1px solid #ddd;
+  border: 1px solid var(--color-font-subdued);
   border-left: none;
   border-right: none;
   border-radius: 0;
@@ -427,4 +430,25 @@ section.note {
 
 .rotate-right-s {
   transform: rotate(4deg);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    /* Dark mode */
+    --color-body: black;
+    --color-font: #DDD;
+    --color-link: rgb(0, 128, 255);
+  }
+
+  html {
+    background-image: none;
+  }
+
+  .brand img {
+    filter: invert(1);
+  }
+
+  .cards > section (not:.note) {
+    border: 1px solid;
+  }
 }
