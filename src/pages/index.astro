@@ -1,103 +1,36 @@
 ---
 import Base from "@layouts/Base.astro";
-import Card from "../components/Card.astro";
-import { Image, Picture } from "@astrojs/image/components";
-import elasticLogo from "@images/elastic-logo-cluster.svg";
-import chefLogo from "@images/chef-logo.svg";
-import rocket from "@images/rocket.svg";
-import rkLogo from "@images/rk-logo.svg";
-import ryan from "@images/ryan-transparent.png";
+import { Picture } from 'astro:assets';
+import ryan from '../images/ryan-transparent.png';
 ---
-<Base title="Ryan Keairns. You should probably close some tabs.">
-  <nav>
-		<div class="brand">
-			<Image src={rkLogo} alt="ryan keairns logo" />
-			<h1>Ryan Keairns</h1>
-		</div>
-    <ul>
-			<li><a href="https://github.com/ryankeairns">GitHub</a></li>
-			<li><a href="https://linkedin.com/in/ryan-keairns">LinkedIn</a></li>
-		</ul>
-  </nav>
-  <header>
-		<Picture
-			widths={[200, 400, 800]}
-			aspectRatio="1:1"
-			src={ryan}
-			alt="Profile picture of Ryan Keairns"
-		/> 
-		<div class="header-text">
-			<h1>Ryan Keairns</h1>
-			<h2>Product and user experience designer specializing in developer tools and operations.</h2>
-		</div>
-  </header>
-  <main class="cards">
-		<section class="flair-1 double-wide">
-			<h4>About</h4>
-			<h2>Profile</h2>
-			<p>My current title at Elastic is <em>Princial Designer - UX Architect</em> where I lead design efforts for key, cross-team business initiatives.</p>
-			<p>Past experience as a developer coupled with an ongoing love for HTML, CSS, and systems design enables me to get into the weeds with engineers and Product Managers to arrive at practical solutions.</p>
-			<p>In addition to web-based, UI design work, I often find myself invovled with the less-glamorous user experiences of CLIs, APIs, and text editors. Developer tooling and operations are constantly evoloving, challenging yet fun to grok, and provide many interesting design opportunities.</p>
-			<p>On a personal note, I am a Midwesterner who now resides in sunny Seattle with my wife, two teenagers, and three cats.</p>
-		</section>
-		<section>
-			<h4>About</h4>
-			<h2>Skills</h2>
-			<ul>
-				<li>Principal Designer</li>
-				<li>Design Manager</li>
-				<li>Design Systems</li>
-				<li>UX Architect</li>
-				<li>Glue Person</li>
-				<li>Research</li>
-				<li>HTML &#x2665;</li>
-				<li>CSS &#x2665;</li>
-			</ul>
-		</section>
-		<section class="emp-badge emp-elastic">
-			<div class="card-notch"></div>
-			<h4>Employer</h4>
-			<h2>Elastic</h2>
-				<p>2018 - Present</p>
-				<div class="sticker"><Image src={elasticLogo} alt="Elastic.co logo" /></div>
-				<div class="overlay"><a target="_blank" href="https://linkedin.com/in/ryan-keairns">View on LinkedIn</a></div>
-			</section>
-		<section class="flair-1 double-wide">
-			<h4>Experience</h4>
-			<h2>Kibana</h2>
-			<p>Directly and indirectly, I have contributed to the user experience of <a target="_blank" href="https://www.elastic.co/kibana/">Kibana</a> in many ways. As both a leader and individual contributor of the Platform UX team, we contribute design, research, and frontend code to the most-used portions of Elastic's web products.</p>
-			<p>Our team is proud to work on core experiences such as Discover, Dashboard, Lens, and Cloud, and a variety of global UIs such as navigation.</p>
-			<p>With a hat tip to past coworkers, we also support the ongoing design and development of the highly-successful <a href="https://elastic.github.io/eui/#/">Elastic UI (EUI) design system.</a></p>
-			<p>Elastic works in the open. For a peek into what design is like here, you can check out my <a href="https://github.com/elastic/kibana/issues?q=is%3Aissue%2Cpr+commenter%3Aryankeairns">GitHub issue activty</a>.</p>
-		</section>
-		<section class="full-width note">
-			<p>Portfolio requests can be made via <a href="mailto:contactryank@gmail.com">email</a>.</p>
-		</section>
-		<section class="emp-badge emp-chef">
-			<div class="card-notch"></div>
-			<h4>Employer</h4>
-			<h2>Chef</h2>
-			<p>2016 - 2018</p>
-			<div class="sticker"><Image src={chefLogo} alt="chef.io logo" /></div>
-			<div class="overlay"><a target="_blank" href="https://linkedin.com/in/ryan-keairns">View on LinkedIn</a></div>
-		</section>
-		<section class="emp-badge emp-startups">
-			<div class="card-notch"></div>
-			<h4>Employer</h4>
-			<h2>Startups</h2>
-			<p>2012-2016</p>
-			<div class="sticker"><Image src={rocket} alt="HLT logo" /></div>
-			<div class="overlay"><a target="_blank" href="https://linkedin.com/in/ryan-keairns">View on LinkedIn</a></div>
-		</section>
-		<section>
-			<h4>Experience</h4>
-			<h2>Case studies</h2>
-			<p>A while back, I prepared two in-depth case studies covering everything from sketches and research on through design, metric tracking, and iteration that demonstrated how my work moved the needle.</p>
-			<p>These were some of my favorite experiences in product design, and I am happy to share them upon request.</p>
-		</section>
-		<section class="full-width note">
-			<p>My work experience extends back another 10+ years covering frontend and backend development.</p>
-			<div class="overlay"><a target="_blank" href="https://linkedin.com/in/ryan-keairns">View my work history on LinkedIn</a></div>
-		</section>
-  </main>
+<Base title="Ryan Keairns. Designer to the stars... of enterprise software and design systems.">
+  <div class="hero hero-grid">
+    <div class="hero-col hero-col-left">
+      <div class="hero-profile">
+        <Picture
+          src={ryan}
+          alt="Profile picture of Ryan Keairns"
+          formats={["avif", "webp"]}
+          class="profile-img"
+        />
+      </div>
+      <h1 class="hero-name">Ryan Keairns</h1>
+      <div class="hero-title">Designer to the stars... of enterprise software and design systems.</div>
+      <div class="hero-links">
+        <a href="https://ryankeairns.substack.com" aria-label="Substack" target="_blank" rel="noopener" class="icon-link">Substack</a>
+        <a href="https://youtube.com/@ryankeairns" aria-label="YouTube" target="_blank" rel="noopener" class="icon-link">YouTube</a>
+        <a href="https://linkedin.com/in/ryan-keairns" aria-label="LinkedIn" target="_blank" rel="noopener" class="icon-link">LinkedIn</a>
+        <a href="https://github.com/ryankeairns" aria-label="GitHub" target="_blank" rel="noopener" class="icon-link">GitHub</a>
+      </div>
+    </div>
+    <div class="hero-divider"></div>
+    <div class="hero-col hero-col-right">
+      <div class="hero-desc">
+        <p>I am a product-minded designer who contributes code.</p>
+        <p>For the most part, I have worked on large-scale web applications and design systems, collaborating with engineers, product managers, and designers to shape and ship <em><s>product experiences</s></em> user interfaces for software.</p>
+        <p>Recently, I have explored how AI coding tools such as Windsurf and Cursor are changing the ways we - as code-capable designers - design and build.</p>
+        <p>My goal is to help designers and design team leaders remain sharp, adaptable, and confident as the industry evolves. If you seek to stay hands-on, expand your impact, or navigate the future, you will find that focus in the work I share.</p>
+      </div>
+    </div>
+  </div>
 </Base>
