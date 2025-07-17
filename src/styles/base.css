@@ -165,6 +165,7 @@ html {
 .hero-title {
   color: var(--color-font-subdued);
   margin-bottom: var(--size-l);
+  font-size: var(--fs-m);
   font-weight: var(--fw);
 }
 .hero-desc {
