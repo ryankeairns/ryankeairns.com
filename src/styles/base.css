@@ -38,9 +38,6 @@
 /* Global */
 
 html {
-  background-color: var(--color-body);
-  /* background-image: linear-gradient(to right bottom, #ffffff 50%, #eeffff, #caffff, #c1ffe8 80%, #e8ffb5); */
-  background-image: linear-gradient(to right bottom, #ffffff 22%, #f8f8f8, #f2f2f2, #ebebeb, #e5e5e5);
   color: var(--color-font);
   font-family: -apple-system, BlinkMacSystemFont, avenir next, avenir, segoe ui, helvetica neue, helvetica, Cantarell, Ubuntu, roboto, noto, arial, sans-serif;
   font-size: var(--fs);
