@@ -1,0 +1,38 @@
+---
+title: "EUI Split Button Component"
+subTitle: "A fast POC to explore primary action + menu patterns"
+description: "Exploring a split-button pattern in EUI to combine a primary action with a secondary menu, using AI-assisted scaffolding and in-repo prototyping."
+date: 2025-09-30
+category: "Design System Evolution"
+tags: ["POC", "EUI", "Patterns", "AI workflow"]
+status: "POC"
+role: "Principal Designer (IC)"
+impact: "Informed discussion on pattern guidance and potential component API for common action clusters"
+priority: 5
+---
+
+> Teams repeatedly recreate “primary action + caret menu” patterns. This POC tested whether EUI should offer a standard split button to reduce inconsistency and custom CSS.
+
+## Challenge
+Product surfaces often need a single *primary* action plus a small set of related actions (e.g., *Run*, with options like *Run with params*, *Schedule*, *Share*).  
+Teams hand-roll this pattern with different components (buttons + popovers), which creates inconsistency and extra QA surface.
+
+## Idea
+Prototype a split button that:
+- Exposes a clear **primary** action (left side)  
+- Provides a compact **menu trigger** (right side) for related actions  
+- Plays nicely with existing EUI theming, sizes, and iconography  
+- Keeps focus/keyboard behavior predictable and accessible
+
+## AI Workflow
+- **ChatGPT** helped outline the component API (props, event surface, disabled/loading states) and accessibility considerations (focus ring, aria-expanded, menu roles).
+- **Cursor** scaffolded the TSX component and story, wired up keyboard handling, and iterated prop types.
+- I tested usage on real product flows to check sizing, density, and common action clusters.
+
+## Outcome
+- A working split button POC with primary click + caret-triggered menu  
+- Early API shape for discussion (e.g., `items`, `onPrimaryClick`, `isLoading`, `size`, `color`)  
+- Identified a11y and theming edge cases to solve before formalizing
+
+## Reflection
+This clarified demand for a shared pattern and helped frame the API discussion around real usage, not hypotheticals. AI tools sped up scaffolding so we could spend more time on behavior and accessibility.

@@ -1,0 +1,49 @@
+---
+title: "Pop the Hood: Inspect EUI in the wild"
+subTitle: "A Chrome extension to reveal EUI components on live pages"
+description: "Lightweight inspector that labels EUI components in the DOM so designers and engineers can identify patterns fast and jump to docs."
+date: 2025-08-01
+category: "AI-Augmented Tooling"
+tags: ["POC", "Design System", "Chrome", "AI workflow"]
+status: "POC"
+role: "Principal Designer (IC)"
+impact: "Reduces friction discovering components and patterns across teams"
+thumb: "~/assets/images/eui-pop-the-hood-illustration.png"
+priority: 3
+---
+
+import euiPopTheHoodImg from '~/assets/images/eui-pop-the-hood-illustration.png';
+
+<img src={euiPopTheHoodImg.src} alt="EUI Pop the Hood illustration" class="w-full rounded-lg mb-8" />
+
+> Small tools can make outsized differences.  
+> **Pop the Hood** helps anyone viewing a Kibana screen answer a simple question:  
+> *"What EUI component is that — and where can I learn more?"*
+
+## Challenge
+Teams often re-implement components or miss existing patterns because discovery in a live product UI is hard. Inspecting the DOM works, but it’s slow, noisy, and disconnected from documentation.  
+
+I wanted a lightweight overlay that not only identified EUI components, but also connected each one directly to its source documentation.
+
+## Idea
+Build a **Chrome extension** that scans the DOM for EUI component signatures and displays tooltip labels — e.g., `EuiBadge`, `EuiEmptyPrompt`, `EuiTable`. Each label reveals a small popover that links directly to the relevant docs or pattern on the EUI site, turning a static inspection tool into a **navigable design-system map**.  
+
+To achieve this, I used AI tools to generate a mapping between **EUI component names and their documentation URLs**. That map powers the extension’s popover, ensuring every identified component includes a contextual **“View Docs”** link — keeping designers and engineers in flow.
+
+## AI Workflow
+- **ChatGPT** helped plan the extension architecture (manifest v3, permissions, content vs. background scripts) and the DOM scanning logic.  
+- **Cursor** scaffolded the content script, event listeners, and tooltip injection while debugging hover/focus collisions and throttling issues.  
+- I used **ChatGPT** again to parse and map EUI’s component index to its documentation routes, generating a lookup object automatically.  
+- The result: an always-up-to-date component-to-docs map, auto-refreshed as EUI evolves.
+
+## Outcome
+- Chrome extension overlay that labels EUI components directly on live Kibana pages  
+- Popover tooltips display component names and a **direct link to EUI documentation**  
+- AI-generated mapping keeps doc links accurate without manual maintenance  
+- Low-overhead toggle via toolbar; performant enough for daily use  
+- Adopted informally by designers and engineers exploring new UI patterns
+
+## Reflection
+**Pop the Hood** removes guesswork and bridges the gap between the product UI and the design system. By combining DOM inspection with AI-generated documentation mapping, I turned a quick debugging utility into a living reference tool.  
+
+It’s a small, fast, and surprisingly useful way to make design systems more discoverable — right where people work.

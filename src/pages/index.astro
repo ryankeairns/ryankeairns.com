@@ -1,33 +1,152 @@
 ---
-import Base from "@layouts/Base.astro";
-import { Picture } from 'astro:assets';
-import ryan from '../images/ryan-transparent.png';
+import Layout from '~/layouts/PageLayout.astro';
+import Hero from '~/components/widgets/Hero.astro';
+import Content from '~/components/widgets/Content.astro';
+import ryanPhoto from '~/assets/images/ryan-in-a-scribble.png';
+import { getCollection } from 'astro:content';
+
+const metadata = {
+  title: 'Ryan Keairns — Hands-On Design Leader Bridging Pixels, Code & Teams',
+  description:
+    'Ryan Keairns is a hands-on design leader who bridges pixels, code, and teams. He uses AI tools like ChatGPT and Cursor to turn ideas into working proofs of concept—bringing design closer to real product experience.',
+};
+
+// Hand-selected featured posts in specific order
+const allPosts = await getCollection('blog');
+const featuredSlugs = [
+  'app-menu-redesign',
+  'eui-popover-defaults',
+  'observability-cues-discover',
+];
+
+const featuredPosts = featuredSlugs
+  .map(slug => allPosts.find(p => p.id.replace(/\.mdx?$/, '') === slug))
+  .filter((p): p is NonNullable<typeof p> => p !== undefined);
 ---
-<Base title="Ryan Keairns. Designer to the stars... of enterprise software and design systems.">
-  <div class="hero hero-grid">
-    <div class="hero-col hero-col-left">
-      <div class="hero-profile">
-        <Picture
-          src={ryan}
-          alt="Profile picture of Ryan Keairns"
-          formats={["avif", "webp"]}
-          class="profile-img"
-        />
+
+<!-- Announce the name clearly for SEO and accessibility -->
+<Fragment slot="sr-only">
+  <h1 class="sr-only">Ryan Keairns — Principal Product Designer</h1>
+</Fragment>
+
+<Layout metadata={metadata}>
+  <!-- Hero Section -->
+  <Hero>
+    <Fragment slot="title">
+      Hi, I’m <span class="font-semibold text-primary">Ryan Keairns</span>.
+      <br />
+      A hands-on design leader who bridges pixels, code, and teams.
+    </Fragment>
+    <Fragment slot="subtitle">
+      Using tools like ChatGPT and Cursor,<br />I turn ideas into working proofs of concept — directly inside the codebase.
+      <br />
+      <span class="font-semibold">Fewer mockups. Faster validation. Real impact.</span>
+    </Fragment>
+    <Fragment slot="actions">
+      <div class="flex flex-col sm:flex-row gap-4 justify-center">
+        <a href="/work" class="btn btn-primary px-6 py-3 rounded-lg bg-primary text-white hover:bg-primary/90 transition">
+          See my work
+        </a>
+        <a href="/contact" class="btn btn-secondary px-6 py-3 rounded-lg border-2 border-primary text-primary hover:bg-primary/10 transition">
+          Get in touch
+        </a>
       </div>
-      <h1 class="hero-name">Ryan Keairns</h1>
-      <h3 class="hero-title"><strong>Practical UX designer</strong> — Design Leader | Product, UX, and Systems | Leading by Building and Shipping.</h3>
-      <div class="hero-links">
-        <a href="https://linkedin.com/in/ryan-keairns" aria-label="LinkedIn" target="_blank" rel="noopener" class="icon-link">LinkedIn</a>
-        <a href="https://github.com/ryankeairns" aria-label="GitHub" target="_blank" rel="noopener" class="icon-link">GitHub</a>
+    </Fragment>
+  </Hero>
+  
+
+  <!-- About Section -->
+  <Content
+    isReversed
+    items={[]}
+    image={{
+      src: ryanPhoto,
+      alt: 'Ryan Keairns headshot',
+      class: 'mx-auto w-full',
+      style: 'max-width: 380px; background: transparent; margin-top: 40px;',
+    }}
+  >
+    <Fragment slot="content">
+      <h2 class="text-3xl font-bold tracking-tight sm:text-4xl mb-6">About Ryan</h2>
+      <div class="text-lg space-y-4 text-muted">
+        <p>
+          I'm a Principal Product Designer with deep experience in design systems and complex product UX. 
+          Over the years, I've led cross-disciplinary teams of designers, researchers, and engineers, shaped Elastic's platform and EUI system, 
+          and built internal tools that help designers move faster with confidence.
+        </p>
+        <p>
+          My current focus is what I call <strong>Proof-of-Concept Design</strong> — 
+          an AI-augmented approach that blends product insight, technical fluency, and fast iteration. 
+          It's hands-on, code-adjacent design driven by working prototypes instead of static mockups.
+        </p>
+        <p>
+          The result: faster feedback loops, tighter collaboration with engineering, and tangible progress toward better user experiences.
+        </p>
       </div>
+    </Fragment>
+  </Content>
+
+  <!-- Latest Work Section -->
+  <section class="py-12 md:py-16 px-4 mx-auto max-w-7xl">
+    <div class="mb-12 text-center">
+      <h2 class="text-3xl md:text-4xl font-bold mb-4">Recent Work — from ideas to working code</h2>
+      <p class="text-lg text-muted mx-auto" style="max-width: 550px;">
+        A few examples of how I use AI-assisted, proof-of-concept design to explore, test, and ship better product experiences.
+      </p>
     </div>
-    <div class="hero-divider"></div>
-    <div class="hero-col hero-col-right">
-      <div class="hero-desc">
-        <p>I’m a Principal-level product designer with 20+ years of experience across UX, UI, and technical implementation. What drives me is execution: moving from idea to production quickly and reliably.</p>
-        <p>My background bridges design and engineering, allowing me to operate strategically while also delivering production-ready solutions. I focus on designing, prototyping, and shipping — not slowing progress with unnecessary process.</p>
-        <p>Always open to conversations about design, product challenges, and building teams and systems that scale.</p>
+
+    {featuredPosts.length > 0 ? (
+      <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
+        {featuredPosts.map((post) => {
+          const { data, id } = post;
+          const slug = id.replace(/\.mdx?$/, '');
+          return (
+            <a 
+              href={`/poc/${slug}`} 
+              class="group block rounded-xl overflow-hidden border border-gray-200 dark:border-gray-800 hover:border-gray-300 dark:hover:border-gray-700 transition-all hover:shadow-lg"
+            >
+              {data.thumb && (
+                <div class="aspect-video overflow-hidden bg-gray-100 dark:bg-gray-900">
+                  <img 
+                    src={data.thumb} 
+                    alt={data.title} 
+                    class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" 
+                  />
+                </div>
+              )}
+              <div class="p-4">
+                <div class="text-xs uppercase tracking-wide text-primary font-semibold mb-2">
+                  {data.category}
+                </div>
+                <h3 class="text-base font-semibold group-hover:text-primary transition mb-2">
+                  {data.title}
+                </h3>
+                {data.subTitle && (
+                  <p class="text-sm text-muted line-clamp-2">
+                    {data.subTitle}
+                  </p>
+                )}
+              </div>
+            </a>
+          );
+        })}
       </div>
+    ) : (
+      <div class="text-center py-8">
+        <p class="text-muted">No posts available yet.</p>
+      </div>
+    )}
+
+    <div class="text-center">
+      <a 
+        href="/work" 
+        class="btn btn-secondary inline-flex items-center gap-2 px-6 py-3 rounded-lg border-2 border-primary text-primary hover:bg-primary/10 transition"
+      >
+        View all work
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+          <path fill-rule="evenodd" d="M10.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L12.586 11H5a1 1 0 110-2h7.586l-2.293-2.293a1 1 0 010-1.414z" clip-rule="evenodd" />
+        </svg>
+      </a>
     </div>
-  </div>
-</Base>
+  </section>
+</Layout>

@@ -1,0 +1,189 @@
+---
+import Layout from '~/layouts/PageLayout.astro';
+import { getCollection } from 'astro:content';
+import Image from '~/components/common/Image.astro';
+
+const metadata = {
+  title: 'Work — POC Gallery',
+};
+
+// Curated order (slugs = filenames without extension, i.e., the MDX slug)
+const ORDER = [
+  'app-menu-redesign',
+  'dynamic-home-pages',
+  'user-solution-switching',
+  'spaces-selector',
+  'eui-popover-defaults',
+  'split-button-poc',
+  'ui-refresh-experiments',
+  'pop-the-hood',
+  'eui-content-cooker',
+  'observability-cues-discover',
+];
+const RANK = Object.fromEntries(ORDER.map((s, i) => [s, ORDER.length - i]));
+
+// Optional short blurbs (shown only if subTitle is empty)
+const BLURBS: Record<string, string> = {
+  'app-menu-redesign': 'Modernized core nav in <24h; sparked planned product work.',
+  'dynamic-home-pages': 'Revived shelved ideas with live, personalized home experiences.',
+  'user-solution-switching': 'Safe per-user view override; opened doors for personalization.',
+  'spaces-selector': 'Pagination + search; finally usable at org scale.',
+  'eui-popover-defaults': 'Unified defaults; uncovered and fixed a hidden timing bug.',
+  'split-button-poc': 'Standard pattern for primary action + menu; informed API direction.',
+  'ui-refresh-experiments': 'VS Code tasks made EUI→Kibana styling fast for everyone.',
+  'pop-the-hood': 'Chrome overlay to ID EUI components and jump to docs.',
+  'eui-content-cooker': 'AI-based data generators; realistic mockups for better reviews.',
+  'observability-cues-discover': 'Adaptive cues in Discover; revealed product-level alignment needs.',
+};
+
+const allPosts = await getCollection('blog');
+const pocs = allPosts
+  .filter((p) => !p.data.draft && ['POC', 'PR', 'Merged'].includes(p.data.status))
+  // ORDER-first; then fall back to your existing priority/date logic
+  .sort((a, b) => {
+    const aSlug = a.id.replace(/\.mdx?$/, '');
+    const bSlug = b.id.replace(/\.mdx?$/, '');
+    const ra = RANK[aSlug] ?? 0;
+    const rb = RANK[bSlug] ?? 0;
+    if (rb !== ra) return rb - ra;
+    const pa = a.data.priority ?? 0;
+    const pb = b.data.priority ?? 0;
+    if (pb !== pa) return pb - pa;
+    return (+b.data.date) - (+a.data.date);
+  });
+
+const categories = [...new Set(pocs.map((p) => p.data.category))];
+---
+
+<Layout metadata={metadata}>
+  <section class="py-12 md:py-16 px-4 mx-auto max-w-7xl">
+    <div class="mb-12">
+      <h1 class="text-4xl md:text-5xl font-bold tracking-tight mb-6">Work</h1>
+      <div class="space-y-4">
+        <p class="text-lg md:text-xl text-muted max-w-4xl mb-5">
+          I still use Figma when it's the right tool — but most of my recent design work now happens directly in product. 
+          Over time, I have shifted from static design handoffs to working proofs of concept built in the actual codebase.
+        </p>
+        
+        <p class="text-lg md:text-xl text-muted max-w-4xl">
+          Each project below started as an idea or user insight and quickly became live, testable code using AI tools like ChatGPT and Cursor. 
+          These are not mockups; they are <em class="italic">real, functional explorations</em> that move design and development forward together, faster.
+        </p>        
+      </div>
+    </div>
+
+    <!-- Category filters -->
+    <div class="mb-10 flex flex-wrap gap-2" id="filter-pills">
+      <button 
+        data-category="all"
+        class="filter-pill px-4 py-2 rounded-full border border-gray-300 dark:border-gray-700 text-sm transition hover:bg-gray-100 dark:hover:bg-gray-800 bg-gray-100 dark:bg-gray-800 font-medium"
+      >
+        All
+      </button>
+      {categories.map((cat) => (
+        <button 
+          data-category={cat}
+          class="filter-pill px-4 py-2 rounded-full border border-gray-300 dark:border-gray-700 text-sm transition hover:bg-gray-100 dark:hover:bg-gray-800"
+        >
+          {cat}
+        </button>
+      ))}
+    </div>
+
+    <!-- POC Cards Grid -->
+    {pocs.length === 0 ? (
+      <div class="text-center py-16">
+        <p class="text-lg text-muted">No POCs yet. Check back soon!</p>
+      </div>
+    ) : (
+      <div class="grid gap-6" id="poc-grid" style="grid-template-columns: repeat(auto-fill, minmax(300px, 400px)); justify-content: center;">
+        {pocs.map((p) => {
+          const { data, id } = p;
+          const slug = id.replace(/\.mdx?$/, '');
+          return (
+            <a 
+              href={`/poc/${slug}`} 
+              data-category={data.category}
+              class="poc-card group block rounded-xl overflow-hidden border border-gray-200 dark:border-gray-800 hover:border-gray-300 dark:hover:border-gray-700 transition-all hover:shadow-lg"
+            >
+              {data.thumb && (
+                <div class="aspect-video overflow-hidden bg-gray-100 dark:bg-gray-900">
+                  <Image 
+                    src={data.thumb} 
+                    alt={data.title}
+                    width={600}
+                    height={338}
+                    class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                  />
+                </div>
+              )}
+              <div class="p-5">
+                <div class="text-xs uppercase tracking-wide text-primary font-semibold mb-2">
+                  {data.category}
+                </div>
+                <h3 class="text-lg font-semibold group-hover:text-primary transition mb-2">
+                  {data.title}
+                </h3>
+                {data.subTitle && (
+                  <p class="text-sm text-muted line-clamp-2 mb-3">
+                    {data.subTitle}
+                  </p>
+                )}
+                {!data.subTitle && BLURBS[slug] && (
+                  <p class="text-sm text-muted line-clamp-2 mb-3">
+                    {BLURBS[slug]}
+                  </p>
+                )}
+                {data.tags && data.tags.length > 0 && (
+                  <div class="flex flex-wrap gap-2">
+                    {data.tags.slice(0, 4).map((tag) => (
+                      <span class="text-xs px-2 py-1 rounded bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300">
+                        {tag}
+                      </span>
+                    ))}
+                  </div>
+                )}
+              </div>
+            </a>
+          );
+        })}
+      </div>
+    )}
+  </section>
+
+  <style>
+    .poc-card.hidden {
+      display: none;
+    }
+  </style>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const filterPills = document.querySelectorAll('.filter-pill');
+      const pocCards = document.querySelectorAll('.poc-card');
+
+      filterPills.forEach(pill => {
+        pill.addEventListener('click', () => {
+          const category = pill.getAttribute('data-category');
+          
+          // Update active state on pills
+          filterPills.forEach(p => {
+            p.classList.remove('bg-gray-100', 'dark:bg-gray-800', 'font-medium');
+          });
+          pill.classList.add('bg-gray-100', 'dark:bg-gray-800', 'font-medium');
+
+          // Filter cards
+          pocCards.forEach(card => {
+            const cardCategory = card.getAttribute('data-category');
+            if (category === 'all' || cardCategory === category) {
+              card.classList.remove('hidden');
+            } else {
+              card.classList.add('hidden');
+            }
+          });
+        });
+      });
+    });
+  </script>
+</Layout>
+

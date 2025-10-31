@@ -1,0 +1,96 @@
+---
+import { getCollection, type CollectionEntry, render } from 'astro:content';
+import Layout from '~/layouts/PageLayout.astro';
+
+export async function getStaticPaths() {
+  const posts = await getCollection('blog');
+  return posts.map((post) => ({
+    params: { slug: post.id.replace(/\.mdx?$/, '') },
+    props: { post },
+  }));
+}
+
+interface Props {
+  post: CollectionEntry<'blog'>;
+}
+
+const { post } = Astro.props;
+const { Content } = await render(post);
+
+const metadata = {
+  title: post.data.title,
+  description: post.data.description || post.data.subTitle,
+  canonical: post.data.canonical,
+};
+---
+
+<Layout metadata={metadata}>
+  <article class="py-12 px-4 mx-auto max-w-4xl">
+    <!-- Header -->
+    <header class="mb-12">
+      <div class="text-sm uppercase tracking-wide text-primary font-semibold mb-4">
+        {post.data.category}
+      </div>
+      <h1 class="text-4xl md:text-5xl font-bold tracking-tight mb-4">
+        {post.data.title}
+      </h1>
+      {post.data.subTitle && (
+        <p class="text-xl text-muted mb-6">
+          {post.data.subTitle}
+        </p>
+      )}
+      
+      <div class="flex flex-wrap gap-4 text-sm text-muted mb-6">
+        {post.data.role && (
+          <div>
+            <span class="font-semibold">Role:</span> {post.data.role}
+          </div>
+        )}
+        {post.data.status && (
+          <div>
+            <span class="font-semibold">Status:</span> {post.data.status}
+          </div>
+        )}
+        <div>
+          <span class="font-semibold">Date:</span> {post.data.date.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}
+        </div>
+      </div>
+
+      {post.data.tags && post.data.tags.length > 0 && (
+        <div class="flex flex-wrap gap-2 mb-8">
+          {post.data.tags.map((tag) => (
+            <span class="text-sm px-3 py-1 rounded-full bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300">
+              {tag}
+            </span>
+          ))}
+        </div>
+      )}
+
+      {post.data.hero && (
+        <div class="rounded-xl overflow-hidden mb-8">
+          <img src={post.data.hero} alt={post.data.title} class="w-full" />
+        </div>
+      )}
+    </header>
+
+    <!-- Content -->
+    <div class="prose prose-lg dark:prose-invert max-w-none">
+      <Content />
+    </div>
+
+    {post.data.impact && (
+      <div class="mt-12 p-6 rounded-xl bg-primary/5 border border-primary/20">
+        <h3 class="text-lg font-semibold mb-2">Impact</h3>
+        <p class="text-muted">{post.data.impact}</p>
+      </div>
+    )}
+
+    <!-- Back link -->
+    <div class="mt-12 pt-8 border-t border-gray-200 dark:border-gray-800">
+      <a href="/work" class="text-primary hover:underline">
+        ← Back to all POCs
+      </a>
+    </div>
+  </article>
+</Layout>
+

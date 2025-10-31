@@ -1,0 +1,164 @@
+---
+title: "Observability Cues in Discover"
+subTitle: "Surfacing insights without leaving the search experience"
+description: "A visionary POC that embeds observability signals directly into Kibana's Discover interface, helping users identify patterns and anomalies faster."
+date: 2025-09-22
+category: "Visionary POCs"
+tags: ["Kibana", "Observability", "Data Visualization", "POC"]
+status: "POC"
+role: "Principal Designer (IC)"
+impact: "Demonstrated future-state vision for integrated observability"
+priority: 0
+draft: false
+---
+
+## Challenge
+
+Users analyzing logs in Kibana's Discover often miss important patterns because:
+- They're focused on individual events (line-by-line reading)
+- Anomalies and spikes are buried in the timeline
+- No visual cues for high-impact fields
+- Switching to dashboards/visualizations breaks flow
+
+**Key Pain Point:** "I wish Discover would just **tell me** what's interesting in my data."
+
+## Idea
+
+What if Discover could **surface observability insights automatically**—without users having to build queries or dashboards?
+
+**Vision:**
+- **Anomaly indicators** directly in the timeline (spikes, drops, patterns)
+- **Field value highlights** showing unusual or high-cardinality values
+- **Smart suggestions** based on data patterns
+- **Inline visualizations** for key fields
+- **Contextual explanations** ("Error rate spiked 3x in last 15min")
+
+Build a **functional POC** to demonstrate the vision and test technical feasibility.
+
+## AI Workflow
+
+### Concept Development (ChatGPT)
+- Explored anomaly detection algorithms (statistical vs ML-based)
+- Discussed real-time processing constraints
+- Analyzed existing patterns in APM, Logs, and Metrics UIs
+- Generated initial component architecture
+
+### Implementation (Cursor + Manual)
+- Built timeline overlay for anomaly visualization
+- Implemented simple statistical anomaly detection (z-score)
+- Created field value ranking system (cardinality + change rate)
+- Added inline mini-charts for numeric fields
+- Styled contextual insight cards
+- Mocked ML-based suggestions (future capability)
+
+### Validation
+- Tested with real Elasticsearch data (logs, APM traces)
+- Demonstrated to product team and UX researchers
+- Gathered feedback on usefulness vs. noise
+- Identified performance constraints for real-time analysis
+
+## Outcome
+
+**Working POC** demonstrating:
+
+✨ **Smart Timeline:**
+- Visual markers for anomalies (error spikes, traffic drops)
+- Hover tooltips with context ("5x error rate increase")
+- Clickable regions to focus on anomalous time ranges
+
+✨ **Field Insights:**
+- Highlighted fields with unusual values
+- Badge indicators for high cardinality or rapid change
+- Inline sparklines for numeric fields
+
+✨ **Contextual Suggestions:**
+- "Most common error messages in this time range"
+- "New error types appeared 5 minutes ago"
+- "Unusual spike in API latency detected"
+
+**Key Learnings:**
+- Performance: Real-time anomaly detection requires careful optimization
+- UX Balance: Too many insights = noise; need smart filtering
+- Trust: Users want to understand **why** something is flagged as interesting
+- Integration: Works best when connected to ML jobs and alerting
+
+## Reflection
+
+### POCs as Vision Communication
+
+This POC wasn't about shipping code—it was about **demonstrating possibility**. By building a functional prototype, I could:
+- Show stakeholders the **feeling** of the experience
+- Validate technical feasibility with engineering
+- Identify UX challenges that mockups would miss
+- Generate excitement and buy-in for future investment
+
+### AI-Assisted Prototyping
+
+**ChatGPT** helped me:
+- Rapidly explore anomaly detection approaches without deep ML expertise
+- Understand statistical methods (z-score, IQR, moving averages)
+- Identify existing Elasticsearch capabilities to leverage
+
+**Cursor** helped me:
+- Implement statistical calculations quickly
+- Generate data transformation logic
+- Build visualization components
+- Debug performance issues
+
+### Balancing Vision and Reality
+
+The POC deliberately included **aspirational features** (ML-powered suggestions) alongside **achievable features** (statistical anomalies). This helped product leadership see both:
+1. What we could ship **soon** (quick wins)
+2. Where we could go **long-term** (strategic vision)
+
+## Supplemental
+
+### Technical Approach
+
+**Anomaly Detection:**
+- Z-score analysis on time-series aggregations
+- Sliding window for baseline comparison (30min windows)
+- Threshold tuning based on data density
+- Placeholder integration with Elasticsearch ML jobs
+
+**Performance Considerations:**
+- Aggregations run on sampled data for speed
+- Caching for repeated queries
+- Progressive enhancement (load insights after initial results)
+- WebWorkers for client-side calculations
+
+### Design Principles
+
+1. **Non-intrusive:** Insights are additive, don't block core workflow
+2. **Explainable:** Every insight includes context and reasoning
+3. **Actionable:** Clicking an insight filters/focuses the data
+4. **Trustworthy:** Visual confidence indicators (low/medium/high certainty)
+
+### User Feedback (Internal Testing)
+
+> "This would have saved me 20 minutes this morning. I was manually hunting for error spikes." — SRE user
+
+> "Love the field highlights. I never think to check cardinality changes." — Support engineer
+
+> "Needs tuning—too many 'insights' on high-volume data—but the concept is solid." — Product manager
+
+### Future Enhancements (Identified Through POC)
+
+- **ML Integration:** Connect to Elasticsearch anomaly detection jobs
+- **Customization:** Let users tune sensitivity and which insights to show
+- **Collaboration:** Share insights with team (link to specific anomaly)
+- **Historical Context:** Compare current anomalies to past patterns
+- **Root Cause Suggestions:** "This spike correlates with deployment X"
+
+### Lessons Learned
+
+1. **Build to learn:** This POC revealed performance constraints early
+2. **Vision POCs need polish:** Even non-production code needs good UX to communicate vision
+3. **Stakeholder demos matter:** Live demo generated more excitement than slide decks ever could
+4. **Document learnings:** POC value extends beyond the code—capture insights for future teams
+
+### Links
+- [POC Demo Video](#) *(placeholder)*
+- [Technical Spike Document](#) *(placeholder)*
+- [Product Team Presentation](#) *(placeholder)*
+

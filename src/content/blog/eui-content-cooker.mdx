@@ -1,0 +1,55 @@
+---
+title: "EUI Content Cooker"
+subTitle: "AI-assisted content and layout tooling for Elastic designers"
+description: "A Figma plugin concept that goes beyond data generation — helping designers build realistic Elastic mockups with AI-generated content, breadcrumb conversion, and editable tables."
+date: 2025-08-10
+category: "AI-Augmented Tooling"
+tags: ["POC", "Figma", "Plugin", "AI workflow", "Elastic"]
+status: "POC"
+role: "Principal Designer (IC)"
+impact: "Empowered Elastic designers to create realistic, data-rich mockups without leaving Figma"
+thumb: "~/assets/images/eui-content-cooker-illustration.png"
+priority: 1
+---
+
+import euiContentCookerImg from '~/assets/images/eui-content-cooker-illustration.png';
+
+<img src={euiContentCookerImg.src} alt="EUI Content Cooker illustration" class="w-full rounded-lg mb-8" />
+
+> Good design starts with believable content.  
+> **EUI Content Cooker** helps Elastic designers prototype with realism — generating authentic data, converting structures, and editing tables directly in Figma.
+
+## Challenge
+Designers across Elastic often mocked up screens using placeholder text or generic data.  
+The results looked synthetic, especially when testing scale or presenting high-fidelity flows to stakeholders.  
+
+We also lacked efficient ways to update key Elastic UI patterns — like breadcrumbs and data tables — which required manual setup and formatting.
+
+## Idea
+Build a **Figma plugin** that streamlines realistic content and layout creation for Elastic designs.  
+The tool began as a data generator, but evolved into a full **content and structure utility** that supports three key workflows:
+
+1. **Data Generation:** Populate mockups with Elastic-specific fields — `service.name`, `host.name`, `@timestamp`, trace IDs, and more — using AI-defined data patterns.  
+2. **Breadcrumb Builder:** Convert a simple list of strings into correctly formatted EUI breadcrumb items, ready to drop into any page design.  
+3. **Table Editing:** Enable designers to adjust and test data layouts with direct table editing — set column widths, move or duplicate columns, and align text to mimic EUI behavior.
+
+## AI Workflow
+- **ChatGPT** helped define generator logic for data fields and create formatting rules for breadcrumb and table structures.  
+- **Cursor** scaffolded the plugin’s architecture (manifest, worker, and UI panel) and wired up TypeScript utilities for Figma integration.  
+- Iterated on real Elastic designs to fine-tune realism, spacing, and layout fidelity.  
+- Each feature (data, breadcrumbs, tables) became modular, allowing future extensions or integration into an internal EUI design toolkit.
+
+## Outcome
+- A multi-purpose Figma plugin that speeds up Elastic design work:  
+  - Realistic Elastic-specific data population  
+  - One-click breadcrumb conversion  
+  - Editable tables with width, alignment, and duplication controls  
+- Improved realism and flexibility in Observability and Security mockups  
+- Designers can now test scale, structure, and hierarchy without switching tools or hand-crafting layouts  
+- Consistent visual alignment with EUI components and real product behavior
+
+## Reflection
+**EUI Content Cooker** turned routine Figma busywork into a creative advantage.  
+By combining AI-generated content with structured layout tools, it helps designers focus on interaction and flow — not formatting.  
+
+This project represents what I love most: using AI to **extend design systems into practical, empowering tools** that make design faster, more expressive, and more connected to the real product.

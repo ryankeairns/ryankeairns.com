@@ -1,0 +1,66 @@
+---
+title: "Kibana App Menu Redesign"
+subTitle: "Reimagining a core navigation pattern in under 24 hours"
+description: "A rapid, AI-assisted proof of concept that modernized Kibana's app menu for scalability and usability. Built and demoed in less than a day using deep product context and direct code iteration."
+date: 2025-10-09
+category: "Product UX Enhancements"
+tags: ["POC", "AI workflow", "Kibana", "Navigation", "Platform"]
+status: "POC"
+role: "Principal Designer (IC)"
+impact: "Demonstrated a scalable, modernized menu pattern that informed planned product development"
+priority: 10
+---
+
+import kibanaAppMenuImg from '~/assets/images/kibana-app-menu-before-and-after.png';
+import YouTubeThumb from '~/assets/images/app-store.png';
+import YouTubeVideo from '../../components/YouTubeVideo.astro';
+
+> When you know the product inside and out, design exploration becomes a matter of hours, not weeks. This POC reimagined one of Kibana's core navigation patterns — designed, built, and demoed in less than 24 hours - directly in code.
+
+
+<img 
+  src={kibanaAppMenuImg.src} 
+  alt="Kibana app menu before and after redesign. The redesigned menu is clearer, more spacious, and shows improved organization."
+  class="block mx-auto my-10 mb-8 max-w-4xl w-full rounded-2xl shadow-xl"
+/>
+
+## Challenge
+Kibana's app menu had grown organically over time and was beginning to show strain. As new solutions and integrations were added, the layout became crowded and inconsistent across products. The structure didn't scale gracefully, and the user experience varied depending on context.
+
+Teams had discussed improving the design, but with competing priorities, it was unlikely to move past the idea stage.
+
+## Idea
+Use my existing product and technical knowledge to go straight to code and prototype a new app menu design — one that could scale, unify layout logic, and modernize the look and feel. Rather than exploring in Figma, I went directly into a local Kibana instance, using AI tools to accelerate coding and iteration.
+
+The intent was simple: show that a better solution could exist *today*, not months from now.
+
+## AI Workflow
+- **ChatGPT** helped outline the component structure and identify where the current app menu lived within the plugin architecture.  
+- **Cursor** assisted with scaffolding the new layout logic, creating a responsive, grid-based design that could handle multiple sections and nested groups.  
+- With AI support, I iterated live in code — from layout to visual tuning — completing a working POC, in a QA environement, in under 24 hours.  
+- Recorded a walkthrough demo and later presented it live to the Platform team, accompanied by a POC link for hands-on review.  
+- Feedback was positive as it solved the most immediate usability issues.
+
+## Demo
+<YouTubeVideo
+  id="NQ5T4PwvaOY"
+  title="App menu redesign walkthrough"
+  thumbnail={YouTubeThumb.src}
+  autoplay={true}
+  caption="Short demo of the redesigned app menu"
+/>
+
+## Outcome
+- Delivered a fully functional, modernized app menu POC within one day  
+- Demonstrated improved scalability, visual hierarchy, and interaction patterns  
+- Provided concrete direction for the next iteration now slated for full development  
+- Shared the demo and live prototype across teams, generating strong alignment on design direction  
+- Learned more about the current technical setup and proactively advised on:  
+  - How the new design could extend to **all application menus** across Kibana  
+  - Potential **EUI enhancements** to support consistent implementation in the future
+
+## Reflection
+This project captures the advantage of pairing domain expertise with AI-accelerated workflows.  
+Because I knew the product's architecture and pain points, I could skip the heavy planning and go straight to a working prototype.  
+In one day, I moved an old conversation into tangible progress — the kind that changes minds and gets built.
+

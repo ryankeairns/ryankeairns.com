@@ -1,0 +1,48 @@
+---
+title: "EUI Popover Defaults and Debugging"
+subTitle: "Improving baseline usability across the system"
+description: "A production PR updating default EuiPopover behavior and testing, resolving legacy edge cases and uncovering a hidden bug during debugging."
+date: 2025-10-17
+category: "Design System Evolution"
+tags: ["PR", "EUI", "Accessibility", "Testing", "AI workflow"]
+status: "Merged"
+role: "Principal Designer (IC)"
+impact: "Improved consistency and stability of a core EUI interaction pattern"
+priority: 6
+---
+
+> Sometimes the most meaningful design-system work isn't adding new components — it's tightening the defaults everyone relies on.  
+> This PR focused on cleaning up long-standing inconsistencies in EuiPopover and, in the process, revealed a hidden bug that had quietly lingered for years.
+
+## Challenge
+EuiPopover underpins countless interactive patterns across Kibana — menus, tooltips, flyouts, dropdowns, you name it.  
+Over time, default settings for focus trapping, repositioning, and closing behavior had drifted.  
+Different teams used slightly different prop combinations (`ownFocus`, `hasArrow`, `repositionOnScroll`), leading to subtle inconsistencies in accessibility and UX.
+
+The goal was to unify these defaults and make the component more predictable out of the box.
+
+## Idea
+Take a "systems health" pass on EuiPopover: simplify its defaults, make keyboard/focus behavior consistent, and ensure clean teardown between open/close cycles.  
+The change would improve reliability everywhere Popover appeared — quietly strengthening UX without adding new complexity.
+
+## AI Workflow
+- **ChatGPT** helped audit the component API and summarize how props were used across the repo.  
+- **Cursor** accelerated implementation — adjusting defaults, refactoring test cases, and suggesting fixes when type errors appeared.  
+- As I ran tests, several unrelated failures surfaced. Digging deeper, I realized I'd uncovered a **pre-existing race condition** that intermittently broke Popover positioning.  
+- I used Cursor and ChatGPT together to trace the bug — combining diff inspection, logging, and step-through debugging until the underlying event-timing issue was clear.  
+- After isolating the cause, I pushed an additional fix that resolved the hidden bug and cleaned up the related test timing.
+
+## Outcome
+- Unified default behavior for focus trapping and repositioning  
+- Simplified prop expectations for downstream teams  
+- Fixed a long-standing timing bug uncovered during test runs  
+- Improved Cypress test coverage and reliability for future regressions  
+- Shipped as a small PR with high ripple impact across EUI-based products  
+
+The fix shipped quietly, but its effects are visible everywhere Popover appears — more stable interactions, better keyboard focus, and cleaner teardown.
+
+## Reflection
+This one started as a "quick cleanup" but turned into a detective story.  
+Finding and fixing that hidden bug was a reminder that attention to defaults isn't busywork — it's craftsmanship.  
+AI tools sped up the tedious parts so I could focus on the reasoning and validation, making the system stronger for everyone downstream.
+

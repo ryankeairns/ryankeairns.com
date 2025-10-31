@@ -1,0 +1,168 @@
+---
+/**
+ * YouTubeVideo.astro
+ * Single, self-contained YouTube embed for MDX/Astro.
+ * - Lazy “click to load” iframe
+ * - Custom or auto YouTube thumbnail
+ * - Autoplay toggle
+ * - Dark-mode aware overlay
+ * - Optional caption
+ */
+
+ interface Props {
+  id: string;
+  title?: string;
+  thumbnail?: string;
+  autoplay?: boolean;
+  caption?: string;
+}
+
+const {
+  id,
+  title = 'Video demo',
+  thumbnail = `https://img.youtube.com/vi/${id}/maxresdefault.jpg`,
+  autoplay = true,
+  caption = title,
+} = Astro.props;
+
+const autoplayQuery = autoplay ? '?autoplay=1' : '';
+---
+
+<figure class="yt-shell">
+  <div
+    class="yt-wrapper"
+    role="button"
+    tabindex="0"
+    aria-label={`Play ${title}`}
+    data-video-id={id}
+    data-autoplay={autoplay}
+    data-title={title}
+  >
+    <img
+      src={thumbnail}
+      alt={title}
+      class="yt-thumb"
+      loading="lazy"
+      decoding="async"
+      width="1280"
+      height="720"
+    />
+    <div class="yt-overlay" aria-hidden="true"></div>
+    <div class="yt-play" aria-hidden="true">▶</div>
+  </div>
+
+  {caption && <figcaption>{caption}</figcaption>}
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const wrappers = document.querySelectorAll('.yt-wrapper');
+      
+      wrappers.forEach((wrapper) => {
+        const videoId = wrapper.getAttribute('data-video-id');
+        const autoplay = wrapper.getAttribute('data-autoplay') === 'true';
+        const title = wrapper.getAttribute('data-title');
+        const autoplayQuery = autoplay ? '?autoplay=1' : '';
+        
+        const loadVideo = () => {
+          wrapper.innerHTML = `<iframe src="https://www.youtube.com/embed/${videoId}${autoplayQuery}" title="${title}" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>`;
+        };
+        
+        // Click handler
+        wrapper.addEventListener('click', loadVideo);
+        
+        // Keyboard handler for accessibility
+        wrapper.addEventListener('keydown', (event: KeyboardEvent) => {
+          if (event.key === 'Enter' || event.key === ' ') {
+            event.preventDefault();
+            loadVideo();
+          }
+        });
+      });
+    });
+  </script>
+
+  <style>
+    .yt-shell {
+      margin: 1.5rem 0;
+    }
+    .yt-wrapper {
+      position: relative;
+      padding-bottom: 56.25%; /* 16:9 */
+      background: #000;
+      border-radius: 0.75rem;
+      cursor: pointer;
+      overflow: hidden;
+      outline: none;
+    }
+    .yt-wrapper:focus-visible {
+      box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.6);
+    }
+    .yt-thumb {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    .yt-wrapper :global(iframe) {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      border: 0;
+    }
+    .yt-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(
+        160deg,
+        rgba(0, 0, 0, 0.4) 0%,
+        rgba(0, 0, 0, 0.0) 50%,
+        rgba(0, 0, 0, 0.55) 100%
+      );
+      pointer-events: none;
+      transition: opacity 0.2s ease-out;
+    }
+    .yt-wrapper:hover .yt-overlay {
+      opacity: 0.7;
+    }
+
+    /* Dark-mode aware */
+    :global(.dark) .yt-overlay,
+    :global([data-theme='dark']) .yt-overlay {
+      background: linear-gradient(
+        160deg,
+        rgba(0, 0, 0, 0.65) 0%,
+        rgba(0, 0, 0, 0.15) 50%,
+        rgba(0, 0, 0, 0.85) 100%
+      );
+    }
+
+    .yt-play {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background: rgba(0, 0, 0, 0.55);
+      color: #fff;
+      font-size: 2.5rem;
+      border-radius: 9999px;
+      width: 4.25rem;
+      height: 4.25rem;
+      display: grid;
+      place-items: center;
+      transition: transform 0.15s ease-out, background 0.15s ease-out;
+    }
+    .yt-wrapper:hover .yt-play {
+      background: rgba(0, 0, 0, 0.8);
+      transform: translate(-50%, -50%) scale(1.05);
+    }
+
+    figcaption {
+      margin-top: 0.5rem;
+      font-size: 0.875rem;
+      text-align: center;
+      color: var(--color-text-muted, rgba(148, 163, 184, 1));
+    }
+  </style>
+</figure>

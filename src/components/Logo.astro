@@ -1,0 +1,21 @@
+---
+import { SITE } from 'astrowind:config';
+---
+
+<div class="flex items-center">
+  <!-- Logo for light mode -->
+  <img
+    src="/images/rk-logo-black.svg"
+    alt={SITE?.name || 'Logo'}
+    class="h-8 w-auto md:h-10 dark:hidden"
+  />
+  <!-- Logo for dark mode -->
+  <img
+    src="/images/rk-logo.svg"
+    alt={SITE?.name || 'Logo'}
+    class="hidden h-8 w-auto md:h-10 dark:block"
+  />
+  <span class="sr-only">
+    {SITE?.name}
+  </span>
+</div>
