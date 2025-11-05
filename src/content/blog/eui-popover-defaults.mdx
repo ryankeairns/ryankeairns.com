@@ -5,44 +5,58 @@ description: "A production PR updating default EuiPopover behavior and testing, 
 date: 2025-10-17
 category: "Design System Evolution"
 tags: ["PR", "EUI", "Accessibility", "Testing", "AI workflow"]
-status: "Merged"
+status: "PR"
 role: "Principal Designer (IC)"
 impact: "Improved consistency and stability of a core EUI interaction pattern"
+thumb: "~/assets/images/eui-popover-defaults.png"
 priority: 6
 ---
+
+import euiPopoverDefaultsImg from '~/assets/images/eui-popover-defaults.png';
+import euiPopoverBeforeImg from '~/assets/images/eui-popover-before.png';
 
 > Sometimes the most meaningful design-system work isn't adding new components — it's tightening the defaults everyone relies on.  
 > This PR focused on cleaning up long-standing inconsistencies in EuiPopover and, in the process, revealed a hidden bug that had quietly lingered for years.
 
 ## Challenge
-EuiPopover underpins countless interactive patterns across Kibana — menus, tooltips, flyouts, dropdowns, you name it.  
-Over time, default settings for focus trapping, repositioning, and closing behavior had drifted.  
-Different teams used slightly different prop combinations (`ownFocus`, `hasArrow`, `repositionOnScroll`), leading to subtle inconsistencies in accessibility and UX.
+EuiPopover underpins several interactive patterns across Kibana such as menus, tours, and actions. As we set out to modernize our UI, it suggested - and quickly aligned - that we would change the default styling to not show the small arrow along the edge of the panel.
 
-The goal was to unify these defaults and make the component more predictable out of the box.
+As is often the case, nothing is so simple in a design system.
+
+<figure class="w-full mb-8">
+  <img src={euiPopoverBeforeImg.src} alt="Current EUI popover with arrow." class="w-full rounded-lg" />
+  <figcaption class="mt-2 text-sm text-muted text-center">Current EUI popover with arrow.</figcaption>
+</figure>
 
 ## Idea
-Take a "systems health" pass on EuiPopover: simplify its defaults, make keyboard/focus behavior consistent, and ensure clean teardown between open/close cycles.  
-The change would improve reliability everywhere Popover appeared — quietly strengthening UX without adding new complexity.
+The changes seemd simple enough - disable the arrow, set a new anchor position, and tighten the offset. To achive this, I would open a PR, change the default for pre-existing props on `EuiPopover`, and be on my way.
+
+Instead, a tricky bug surfaced that affected placement of the popover relative to its anchor. When no arrow was present, the calculations to determine if ample space was present - in the desired direction - were returning inaccurate 'scores'. These scores are used to determine whether the desired direction of opening of popover had sufficient space.
 
 ## AI Workflow
-- **ChatGPT** helped audit the component API and summarize how props were used across the repo.  
+- **ChatGPT** helped audit the component API and summarize how `EuiPopover` props were used across the library.  
 - **Cursor** accelerated implementation — adjusting defaults, refactoring test cases, and suggesting fixes when type errors appeared.  
-- As I ran tests, several unrelated failures surfaced. Digging deeper, I realized I'd uncovered a **pre-existing race condition** that intermittently broke Popover positioning.  
-- I used Cursor and ChatGPT together to trace the bug — combining diff inspection, logging, and step-through debugging until the underlying event-timing issue was clear.  
-- After isolating the cause, I pushed an additional fix that resolved the hidden bug and cleaned up the related test timing.
+- As I ran tests, several unrelated failures surfaced. Digging deeper, I realized I'd uncovered a **but in the score calculation ** that broke Popover positioning.
+- I used Cursor and ChatGPT together to trace the bug — combining diff inspection, logging, and step-through debugging until the underlying issue was clear.  
+- After isolating the cause, I pushed an additional fix that resolved the hidden bug and cleaned up the related end-to-end tests.
 
 ## Outcome
-- Unified default behavior for focus trapping and repositioning  
-- Simplified prop expectations for downstream teams  
-- Fixed a long-standing timing bug uncovered during test runs  
-- Improved Cypress test coverage and reliability for future regressions  
-- Shipped as a small PR with high ripple impact across EUI-based products  
+- Achieved desired default style and positioning  
+- Fixed a long-standing space calculation bug uncovered during test builds  
+- Fixed a second bug where existing logic would favor the first position with a perfect score, regardless of consumer preference
+- Improved Cypress test configuration and reliability for future regressions  
+- Created a PR that will modernize popover styles across EUI-based products  
 
 The fix shipped quietly, but its effects are visible everywhere Popover appears — more stable interactions, better keyboard focus, and cleaner teardown.
 
+<figure class="w-full mb-8">
+  <img src={euiPopoverDefaultsImg.src} alt="Redesigned UI popover shown in light and dark mode." class="w-full rounded-lg" />
+  <figcaption class="mt-2 text-sm text-muted text-center">Images from PR to modernize EUI popover.</figcaption>
+</figure>
+
 ## Reflection
 This one started as a "quick cleanup" but turned into a detective story.  
+
 Finding and fixing that hidden bug was a reminder that attention to defaults isn't busywork — it's craftsmanship.  
-AI tools sped up the tedious parts so I could focus on the reasoning and validation, making the system stronger for everyone downstream.
+AI tools sped up the tedious parts so I could focus on the reasoning and validation, making the system stronger for everyone downstream. In the end, with the help of tooling, I _learned_ how the component worked and was more certain of the fix being proposed in my PR.
 

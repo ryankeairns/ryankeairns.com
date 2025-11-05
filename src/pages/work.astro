@@ -56,18 +56,20 @@ const categories = [...new Set(pocs.map((p) => p.data.category))];
 ---
 
 <Layout metadata={metadata}>
-  <section class="py-12 md:py-16 px-4 mx-auto max-w-7xl">
+  <section class="py-12 md:py-16 px-4 mx-auto max-w-5xl">
     <div class="mb-12">
       <h1 class="text-4xl md:text-5xl font-bold tracking-tight mb-6">Work</h1>
       <div class="space-y-4">
-        <p class="text-lg md:text-xl text-muted max-w-4xl mb-5">
+        <p class="text-lg md:text-lg text-muted max-w-4xl mb-5">
           I still use Figma when it's the right tool — but most of my recent design work now happens directly in product. 
           Over time, I have shifted from static design handoffs to working proofs of concept built in the actual codebase.
         </p>
         
-        <p class="text-lg md:text-xl text-muted max-w-4xl">
-          Each project below started as an idea or user insight and quickly became live, testable code using AI tools like ChatGPT and Cursor. 
-          These are not mockups; they are <em class="italic">real, functional explorations</em> that move design and development forward together, faster.
+        <p class="text-lg md:text-lg text-muted max-w-4xl">
+          Each project below started as an idea or user insight and quickly became live, testable code using AI tools like ChatGPT and Cursor.
+        </p>
+        <p class="text-lg md:text-xl max-w-4xl">
+          <span class="font-semibold">These are not mockups; they are <em class="italic">real, functional explorations</em> that move design and development forward together, faster.</span>
         </p>        
       </div>
     </div>
@@ -96,7 +98,7 @@ const categories = [...new Set(pocs.map((p) => p.data.category))];
         <p class="text-lg text-muted">No POCs yet. Check back soon!</p>
       </div>
     ) : (
-      <div class="grid gap-6" id="poc-grid" style="grid-template-columns: repeat(auto-fill, minmax(300px, 400px)); justify-content: center;">
+      <div class="grid gap-6" id="poc-grid" style="grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); justify-content: center;">
         {pocs.map((p) => {
           const { data, id } = p;
           const slug = id.replace(/\.mdx?$/, '');

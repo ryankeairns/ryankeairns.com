@@ -8,8 +8,13 @@ tags: ["POC", "AI workflow", "Kibana", "Platform", "Content Management"]
 status: "POC"
 role: "Principal Designer (IC)"
 impact: "Revived multi-year design concepts and revealed architectural gaps in Kibana's content framework"
+thumb: "~/assets/images/dynamic-home-after.png"
 priority: 9
 ---
+
+import dynamicHomeBeforeImg from '~/assets/images/dynamic-home-before.png';
+import dynamicHomeDesignImg from '~/assets/images/dynamic-home-design.png';
+import dynamicHomeAfterImg from '~/assets/images/dynamic-home-after.png';
 
 > Ideas don't die because they're bad — they die because there's no time or tooling to prove them.  
 > This project showed what happens when AI closes that gap.
@@ -21,12 +26,22 @@ The vision was to surface user-specific content such as "recent dashboards," "sa
 Everyone agreed it was a good idea. It just never made it to the top of the roadmap.  
 Without engineering time to prototype it, the concept sat untouched in Figma files and old Slack threads.
 
+<figure class="w-full mb-8">
+  <img src={dynamicHomeBeforeImg.src} alt="Current Kibana home page with only static content" class="w-full rounded-lg" />
+  <figcaption class="mt-2 text-sm text-muted text-center">Redesigned Kibana home page with only static content.</figcaption>
+</figure>
+
 ## Idea
 Revisit the original ideas and rebuild them as working, in-product proofs of concept using AI-assisted coding.  
 My goal was to show that *personalized home pages* weren't just design aspirations — they could be real, functional, and achievable within the existing Kibana architecture.  
 
 I used ChatGPT to help sketch the architecture and Cursor to scaffold live prototypes in a local Kibana instance.  
 Within a few short demos, I had fully functional examples showing dynamic content based on user context — all running in code, not mockups.
+
+<figure class="w-full mb-8">
+  <img src={dynamicHomeDesignImg.src} alt="Redesigned Kibana home page with dynamic content" class="w-full rounded-lg" />
+  <figcaption class="mt-2 text-sm text-muted text-center">Proposed Kibana home page design with dynamic content.</figcaption>
+</figure>
 
 ## AI Workflow
 - **ChatGPT** helped identify where and how the home page components were rendered, how content modules were fetched, and where new data hooks could integrate safely.  
@@ -36,16 +51,20 @@ Within a few short demos, I had fully functional examples showing dynamic conten
 - Presented the prototypes to the **entire Platform team**, sparking discussion around new content management capabilities and where they should live.
 
 ## Outcome
-- Functional POCs for dynamic home pages in **Discover**, **Dashboard**, and **Kibana Home**  
+- Functional POC for dynamic home pages expanded to include **Discover**, **Dashboard**, and **Kibana Home**  
 - Showed real-time examples of personalized, user-aware layouts in code  
 - Demonstrated the feasibility (and current limits) of Kibana's content management approach  
 - Catalyzed cross-team alignment on next steps for user-specific content architecture  
+- Proposed new, portable UIs to front existing servies for favorites and recents
 - Revealed a hidden architectural issue: the **TableListView component** used on several pages was an entire page implementation, not a reusable component — blocking adoption elsewhere  
-- As a result, new planned work is now underway to **refactor TableListView** into modular, reusable pieces  
+- As a result, new planned work is now underway to **refactor TableListView** into modular, reusable pieces while engineers have joined the exploration of new content panels
+
+<figure class="w-full mb-8">
+  <img src={dynamicHomeAfterImg.src} alt="Screenshots of dyanmic home pages from live POC" class="w-full rounded-lg" />
+  <figcaption class="mt-2 text-sm text-muted text-center">Screenshots of dyanmic home pages from live POC.</figcaption>
+</figure>
 
 ## Reflection
-This project captured what I love about designing in product.  
-AI tools made it possible to un-shelve multi-year design ideas and prove them in real, working code.  
-Seeing the team's reaction — and watching those prototypes evolve into planned engineering work — was deeply rewarding.  
-Sometimes, all an idea needs is someone willing to bring it back to life with the right tools.
+This project captured what I love about designing in the product.
 
+AI tools made it possible to un-shelve design ideas spanning several years and prove them in real, working code. Seeing the team's reaction — and watching those prototypes evolve into planned engineering work — was deeply rewarding. Sometimes, all an idea needs is someone willing to bring it back to life with the right tools.

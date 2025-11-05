@@ -8,19 +8,19 @@ tags: ["POC", "EUI", "Kibana", "Automation", "AI workflow"]
 status: "POC"
 role: "Principal Designer (IC)"
 impact: "Enabled faster iteration on visual updates and made local builds more accessible to non-engineers"
+thumb: "~/assets/images/ui-refresh-experiments.png"
 priority: 4
 ---
 
-> The hardest part of testing visual changes in Kibana isn't the design — it's the setup.  
-> These VS Code tasks turned an infamous multi-step process into a single command that anyone could run.
+import uiRefreshImg from '~/assets/images/ui-refresh-experiments.png';
+import uiScriptsImg from '~/assets/images/ui-experiment-scripts.png';
+
+> The hardest part of testing visual changes in Kibana isn't the design — it's the setup. These VS Code tasks turned an infamous multi-step process into a single command that anyone could run.
 
 ## Challenge
-Testing EUI style and token changes inside Kibana had long been a headache.  
-The workflow required building EUI packages locally, updating Kibana's `package.json` to reference the new tarball, clearing caches, and rebuilding.  
-Even small changes — like a color token or spacing tweak — could eat up 30+ minutes of repetitive terminal steps.
+Testing EUI style and token changes inside Kibana had long been a headache. The workflow required building EUI packages locally, updating Kibana's `package.json` to reference the new tarball, clearing caches, and rebuilding. Even small changes — like a color token or spacing tweak — could eat up 30+ minutes of repetitive terminal steps.
 
-For designers, it was effectively out of reach. For engineers, it was simply painful.  
-I wanted a way to make it fast, reliable, and repeatable.
+For designers, it was effectively out of reach. For engineers, it was simply painful. I wanted a way to make it fast, reliable, and repeatable.
 
 ## Idea
 Create a set of **VS Code tasks** that automated the entire cycle — from building EUI to starting Kibana with the updated packages.  
@@ -38,6 +38,11 @@ The goal wasn't just personal convenience — it was to make visual iteration ap
 - Iterated locally, testing edge cases like failed builds or mismatched Node versions.  
 - Once stable, I shared the scripts with other designers and engineers, walking through how to use them to preview new EUI tokens and UI refresh concepts.
 
+<figure class="w-full mb-8">
+  <img src={uiScriptsImg.src} alt="VS Code tasks to streamline testing of design changes." class="w-full rounded-lg" />
+  <figcaption class="mt-2 text-sm text-muted text-center">VS Code tasks to streamline testing of design changes.</figcaption>
+</figure>
+
 ## Outcome
 - Added reproducible VS Code tasks to automate building EUI and starting Kibana locally  
 - Reduced setup time for testing visual changes from ~30 minutes to under 5  
@@ -47,6 +52,11 @@ The goal wasn't just personal convenience — it was to make visual iteration ap
 
 The style updates themselves — color, spacing, and typographic adjustments — were standard.  
 But the automation around them changed the workflow entirely.
+
+<figure class="w-full mb-8">
+  <img src={uiRefreshImg.src} alt="Before and after of EUI and Kibana changes." class="w-full rounded-lg" />
+  <figcaption class="mt-2 text-sm text-muted text-center">Screenshots of design experiments from EUI and Kibana POC environment.</figcaption>
+</figure>
 
 ## Reflection
 What started as a side project to test UI tweaks turned into an enabler for faster collaboration.  

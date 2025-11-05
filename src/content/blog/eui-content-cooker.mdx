@@ -13,17 +13,17 @@ priority: 1
 ---
 
 import euiContentCookerImg from '~/assets/images/eui-content-cooker-illustration.png';
+import contentCookerGif from '~/assets/images/eui-content-cooker.gif';
+import contentCookerTableGif from '~/assets/images/eui-content-cooker-table.gif';
 
 <img src={euiContentCookerImg.src} alt="EUI Content Cooker illustration" class="w-full rounded-lg mb-8" />
 
-> Good design starts with believable content.  
-> **EUI Content Cooker** helps Elastic designers prototype with realism — generating authentic data, converting structures, and editing tables directly in Figma.
+> Design reviews are more productive with believable content. **EUI Content Cooker** helps Elastic designers prototype with realism — generating authentic data, converting structures, and editing tables directly in Figma.
 
 ## Challenge
-Designers across Elastic often mocked up screens using placeholder text or generic data.  
-The results looked synthetic, especially when testing scale or presenting high-fidelity flows to stakeholders.  
+Designers across Elastic often mock up screens using placeholder text or generic data. The results looked synthetic, especially when testing scale or presenting high-fidelity flows to stakeholders.  
 
-We also lacked efficient ways to update key Elastic UI patterns — like breadcrumbs and data tables — which required manual setup and formatting.
+We also lacked efficient ways to update EUI Figma components — like breadcrumbs and tables — which required much clicking and formatting.
 
 ## Idea
 Build a **Figma plugin** that streamlines realistic content and layout creation for Elastic designs.  
@@ -44,12 +44,21 @@ The tool began as a data generator, but evolved into a full **content and struct
   - Realistic Elastic-specific data population  
   - One-click breadcrumb conversion  
   - Editable tables with width, alignment, and duplication controls  
-- Improved realism and flexibility in Observability and Security mockups  
+- Improved realism and flexibility in solution mockups
 - Designers can now test scale, structure, and hierarchy without switching tools or hand-crafting layouts  
-- Consistent visual alignment with EUI components and real product behavior
+
+<figure class="w-full max-w-5xl mb-8">
+  <img src={contentCookerGif.src} alt="EUI Content Cooker interaction demo" class="w-full rounded-lg" />
+  <figcaption class="mt-2 text-sm text-muted text-center">Adding realistic content to mockups from generators built with ChatGPT.</figcaption>
+</figure>
+
+<figure class="w-full max-w-5xl mb-8">
+  <img src={contentCookerTableGif.src} alt="EUI Content Cooker interaction demo" class="w-full rounded-lg" />
+  <figcaption class="mt-2 text-sm text-muted text-center">Manipulating table content with EUI Content Cooker.</figcaption>
+</figure>
 
 ## Reflection
 **EUI Content Cooker** turned routine Figma busywork into a creative advantage.  
 By combining AI-generated content with structured layout tools, it helps designers focus on interaction and flow — not formatting.  
 
-This project represents what I love most: using AI to **extend design systems into practical, empowering tools** that make design faster, more expressive, and more connected to the real product.
+This project represents something new I have grown to enjoy: using AI to **extend design systems into practical, empowering tools** that make design faster, more expressive, and more connected to the real product.

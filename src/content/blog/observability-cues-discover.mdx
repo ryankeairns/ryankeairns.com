@@ -8,9 +8,12 @@ tags: ["Kibana", "Observability", "Data Visualization", "POC"]
 status: "POC"
 role: "Principal Designer (IC)"
 impact: "Demonstrated future-state vision for integrated observability"
+thumb: "~/assets/images/product-cues-after.png"
 priority: 0
-draft: false
 ---
+
+import productCuesBeforeImg from '~/assets/images/product-cues-before.png';
+import productCuesAfterImg from '~/assets/images/product-cues-after.png';
 
 ## Challenge
 
@@ -21,6 +24,11 @@ Users analyzing logs in Kibana's Discover often miss important patterns because:
 - Switching to dashboards/visualizations breaks flow
 
 **Key Pain Point:** "I wish Discover would just **tell me** what's interesting in my data."
+
+<figure class="w-full mb-8">
+  <img src={productCuesBeforeImg.src} alt="Current in-product cue is a simple badge." class="w-full rounded-lg" />
+  <figcaption class="mt-2 text-sm text-muted text-center">Current in-product cue is a simple badge.</figcaption>
+</figure>
 
 ## Idea
 
@@ -81,6 +89,11 @@ Build a **functional POC** to demonstrate the vision and test technical feasibil
 - UX Balance: Too many insights = noise; need smart filtering
 - Trust: Users want to understand **why** something is flagged as interesting
 - Integration: Works best when connected to ML jobs and alerting
+
+<figure class="w-full mb-8">
+  <img src={productCuesAfterImg.src} alt="Screenshots of smart, data-driven cues taken from POC environment." class="w-full rounded-lg" />
+  <figcaption class="mt-2 text-sm text-muted text-center">Screenshots of smart, data-driven cues taken from POC environment.</figcaption>
+</figure>
 
 ## Reflection
 

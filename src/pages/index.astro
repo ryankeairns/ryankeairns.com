@@ -2,6 +2,7 @@
 import Layout from '~/layouts/PageLayout.astro';
 import Hero from '~/components/widgets/Hero.astro';
 import Content from '~/components/widgets/Content.astro';
+import Image from '~/components/common/Image.astro';
 import ryanPhoto from '~/assets/images/ryan-in-a-scribble.png';
 import { getCollection } from 'astro:content';
 
@@ -15,8 +16,8 @@ const metadata = {
 const allPosts = await getCollection('blog');
 const featuredSlugs = [
   'app-menu-redesign',
-  'eui-popover-defaults',
-  'observability-cues-discover',
+  'dynamic-home-pages',
+  'eui-content-cooker',
 ];
 
 const featuredPosts = featuredSlugs
@@ -107,10 +108,12 @@ const featuredPosts = featuredSlugs
             >
               {data.thumb && (
                 <div class="aspect-video overflow-hidden bg-gray-100 dark:bg-gray-900">
-                  <img 
+                  <Image 
                     src={data.thumb} 
-                    alt={data.title} 
-                    class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" 
+                    alt={data.title}
+                    width={600}
+                    height={338}
+                    class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
                   />
                 </div>
               )}

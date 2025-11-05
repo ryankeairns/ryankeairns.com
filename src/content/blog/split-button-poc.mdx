@@ -8,8 +8,11 @@ tags: ["POC", "EUI", "Patterns", "AI workflow"]
 status: "POC"
 role: "Principal Designer (IC)"
 impact: "Informed discussion on pattern guidance and potential component API for common action clusters"
+thumb: "~/assets/images/eui-split-button.png"
 priority: 5
 ---
+
+import euiSplitButtonImg from '~/assets/images/eui-split-button.png';
 
 > Teams repeatedly recreate “primary action + caret menu” patterns. This POC tested whether EUI should offer a standard split button to reduce inconsistency and custom CSS.
 
@@ -33,6 +36,11 @@ Prototype a split button that:
 - A working split button POC with primary click + caret-triggered menu  
 - Early API shape for discussion (e.g., `items`, `onPrimaryClick`, `isLoading`, `size`, `color`)  
 - Identified a11y and theming edge cases to solve before formalizing
+
+<figure class="w-full mb-8">
+  <img src={euiSplitButtonImg.src} alt="EUI split button shown in light and dark mode." class="w-full rounded-lg" />
+  <figcaption class="mt-2 text-sm text-muted text-center">EUI split button PR images.</figcaption>
+</figure>
 
 ## Reflection
 This clarified demand for a shared pattern and helped frame the API discussion around real usage, not hypotheticals. AI tools sped up scaffolding so we could spend more time on behavior and accessibility.

@@ -8,26 +8,31 @@ tags: ["POC", "AI workflow", "Kibana", "Layout grid", "Scalability"]
 status: "Merged"
 role: "Principal Designer (IC)"
 impact: "Improved scalability and usability of the Spaces selector page in Kibana"
+thumb: "~/assets/images/space-selector-after.png"
 priority: 7
 ---
+
+import spaceSelectorBeforeImg from '~/assets/images/space-selector-before.png';
+import spaceSelectorAfterImg from '~/assets/images/space-selector-after.png';
 
 > Most of my design work now happens where users experience it — in the product itself.  
 > This update to the Spaces selector started as a quick investigation but became a solid example of how AI tools and in-repo design can unblock real usability issues fast.
 
 ## Challenge
-The original Spaces selector wasn't built for scale.  
-It relied on a single, card-based layout that worked fine for a few spaces — but quickly fell apart when users had dozens or even hundreds.  
-
-There was no pagination or list-view alternative, so load time and scroll depth both ballooned.  
-And at one point, it didn't even include a search input, making navigation painful for larger deployments.  
+The original Spaces selector wasn't built for scale. It relied on a single, card-based layout that worked fine for a few spaces — but quickly fell apart when users had dozens or even hundreds. There was no pagination or list-view alternative, so load time and scroll depth both ballooned. And at one point, it didn't even include a search input, making navigation painful for larger deployments.  
 
 The issue had been known internally for years — everyone agreed it needed improvement, but it kept getting pushed down the backlog.
 
+<figure class="w-full mb-8">
+  <img src={spaceSelectorBeforeImg.src} alt="Space selector UI before change" class="w-full rounded-lg" />
+  <figcaption class="mt-2 text-sm text-muted text-center">Space selector screen with unscalable card design.</figcaption>
+</figure>
+
 ## Idea
-After coming across the enhancement request again, I decided to take it on myself.  
-With my growing comfort using AI tools like ChatGPT and Cursor, it felt like the perfect test case to see how far I could go on my own.  
+After coming across the enhancement request again, I decided to take it on myself. With my growing comfort using AI tools like ChatGPT and Cursor, it felt like the perfect test case to see how far I could go on my own.  
 
 The goal was simple: make the selector usable at scale without adding dependencies or changing core behavior.  
+
 I wanted to explore a more flexible layout pattern, add pagination, and introduce a lightweight search input for quick filtering — all within the existing Kibana architecture.
 
 ## AI Workflow
@@ -44,7 +49,12 @@ A redesigned Spaces selector that:
 - Retains the familiar card layout while improving performance and accessibility  
 - Requires no EUI changes and minimal refactor overhead  
 
-The enhancement PR was merged, resolving a long-standing usability issue and improving day-to-day workflows for large organizations using Kibana.
+The [enhancement PR](https://github.com/elastic/kibana/pull/229046) was merged, resolving a years-long usability issue and improving day-to-day workflows for large organizations using Kibana.
+
+<figure class="w-full mb-8">
+  <img src={spaceSelectorAfterImg.src} alt="Space selector UI after change" class="w-full rounded-lg" />
+  <figcaption class="mt-2 text-sm text-muted text-center">Space selector screen with scalable, table list view.</figcaption>
+</figure>
 
 ## Reflection
 This project represents a turning point in how I approach design work.  
