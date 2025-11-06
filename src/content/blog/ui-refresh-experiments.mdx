@@ -18,9 +18,9 @@ import uiScriptsImg from '~/assets/images/ui-experiment-scripts.png';
 > The hardest part of testing visual changes in Kibana isn't the design — it's the setup. These VS Code tasks turned an infamous multi-step process into a single command that anyone could run.
 
 ## Challenge
-Testing EUI style and token changes inside Kibana had long been a headache. The workflow required building EUI packages locally, updating Kibana's `package.json` to reference the new tarball, clearing caches, and rebuilding. Even small changes — like a color token or spacing tweak — could eat up 30+ minutes of repetitive terminal steps.
+Testing local EUI style and token changes inside Kibana had long been a headache. The workflow required building EUI packages - in a very specific mannger - then updating Kibana's `package.json` to reference the new tarball, clearing caches, and rebuilding. Even small changes — like a color token or spacing tweak — could eat up 30+ minutes of repetitive terminal steps.
 
-For designers, it was effectively out of reach. For engineers, it was simply painful. I wanted a way to make it fast, reliable, and repeatable.
+For designers, it was effectively out of reach. For engineers, it was simply painful. I wanted a way to make it fast, reliable, and repeatable way to test cohesive, design system changesets in the actual product.
 
 ## Idea
 Create a set of **VS Code tasks** that automated the entire cycle — from building EUI to starting Kibana with the updated packages.  
@@ -50,8 +50,7 @@ The goal wasn't just personal convenience — it was to make visual iteration ap
 - Became a shared tool within the Platform UX and SharedUX teams, referenced in internal documentation  
 - Provided the foundation for exploring the broader UI refresh effort in a fast, iterative loop  
 
-The style updates themselves — color, spacing, and typographic adjustments — were standard.  
-But the automation around them changed the workflow entirely.
+The style updates themselves — color, spacing, and typographic adjustments — were standard. But the automation around them changed the workflow entirely.
 
 <figure class="w-full mb-8">
   <img src={uiRefreshImg.src} alt="Before and after of EUI and Kibana changes." class="w-full rounded-lg" />
@@ -59,7 +58,7 @@ But the automation around them changed the workflow entirely.
 </figure>
 
 ## Reflection
-What started as a side project to test UI tweaks turned into an enabler for faster collaboration.  
-These scripts removed friction that had slowed everyone down for years and made the "design in product" loop more accessible to non-engineers.  
+What started as a side project to test UI tweaks turned into an enabler for faster collaboration. These scripts removed friction that had slowed everyone down for years and made the "design in product" loop more accessible to non-engineers.  
+
 It was deeply satisfying to see others pick up and extend the approach — a small investment that paid dividends in collective velocity.
 

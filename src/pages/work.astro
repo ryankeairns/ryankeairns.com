@@ -37,8 +37,26 @@ const BLURBS: Record<string, string> = {
 };
 
 const allPosts = await getCollection('blog');
+
+// Featured case studies (or any featured work)
+// Use featured: true in frontmatter, and priority (lower = more prominent)
+const featured = allPosts
+  .filter((p) => !p.data.draft && p.data.featured)
+  .sort((a, b) => {
+    const pa = a.data.priority ?? 999;
+    const pb = b.data.priority ?? 999;
+    if (pa !== pb) return pa - pb; // smaller priority first
+    return (+b.data.date) - (+a.data.date); // newer first as tie-breaker
+  });
+
+// POCs: exclude featured so nothing appears twice
 const pocs = allPosts
-  .filter((p) => !p.data.draft && ['POC', 'PR', 'Merged'].includes(p.data.status))
+  .filter(
+    (p) =>
+      !p.data.draft &&
+      !p.data.featured &&
+      ['POC', 'PR', 'Merged'].includes(p.data.status)
+  )
   // ORDER-first; then fall back to your existing priority/date logic
   .sort((a, b) => {
     const aSlug = a.id.replace(/\.mdx?$/, '');
@@ -58,39 +76,71 @@ const categories = [...new Set(pocs.map((p) => p.data.category))];
 <Layout metadata={metadata}>
   <section class="py-12 md:py-16 px-4 mx-auto max-w-5xl">
     <div class="mb-12">
-      <h1 class="text-4xl md:text-5xl font-bold tracking-tight mb-6">Work</h1>
+      <h1 class="text-4xl md:text-5xl font-bold tracking-tight mb-10">Work</h1>
       <div class="space-y-4">
+        <h2 class="text-2xl md:text-3xl tracking-tight mb-6">Case Studies</h2>
         <p class="text-lg md:text-lg text-muted max-w-4xl mb-5">
-          I still use Figma when it's the right tool — but most of my recent design work now happens directly in product. 
-          Over time, I have shifted from static design handoffs to working proofs of concept built in the actual codebase.
-        </p>
-        
-        <p class="text-lg md:text-lg text-muted max-w-4xl">
-          Each project below started as an idea or user insight and quickly became live, testable code using AI tools like ChatGPT and Cursor.
-        </p>
-        <p class="text-lg md:text-xl max-w-4xl">
-          <span class="font-semibold">These are not mockups; they are <em class="italic">real, functional explorations</em> that move design and development forward together, faster.</span>
-        </p>        
+          These case studies highlight end-to-end design work that delivered measurable impact across Elastic’s platform. Each shows how I approach complex, cross-team problems — from framing and alignment to implementation and adoption.
+        </p>  
       </div>
     </div>
 
-    <!-- Category filters -->
-    <div class="mb-10 flex flex-wrap gap-2" id="filter-pills">
-      <button 
-        data-category="all"
-        class="filter-pill px-4 py-2 rounded-full border border-gray-300 dark:border-gray-700 text-sm transition hover:bg-gray-100 dark:hover:bg-gray-800 bg-gray-100 dark:bg-gray-800 font-medium"
-      >
-        All
-      </button>
-      {categories.map((cat) => (
-        <button 
-          data-category={cat}
-          class="filter-pill px-4 py-2 rounded-full border border-gray-300 dark:border-gray-700 text-sm transition hover:bg-gray-100 dark:hover:bg-gray-800"
-        >
-          {cat}
-        </button>
-      ))}
-    </div>
+    {featured.length > 0 && (
+      <div class="mb-12 grid gap-6 md:grid-cols-2">
+        {featured.map((p) => {
+          const { data, id } = p;
+          const slug = id.replace(/\.mdx?$/, '');
+          return (
+            <a
+              href={`/poc/${slug}`}
+              data-category={data.category}
+              class="feature-card group block rounded-2xl overflow-hidden border border-gray-200 dark:border-gray-800 hover:border-gray-300 dark:hover:border-gray-700 transition-all hover:shadow-xl"
+            >
+              {data.thumb && (
+                <div class="aspect-[16/9] overflow-hidden bg-gray-100 dark:bg-gray-900">
+                  <Image
+                    src={data.thumb}
+                    alt={data.title}
+                    width={900}
+                    height={506}
+                    class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                  />
+                </div>
+              )}
+              <div class="p-6 md:p-7">
+                <div class="flex items-center justify-between mb-3">
+                  <div class="text-xs uppercase tracking-wide text-primary font-semibold">
+                    {data.category ?? 'Case Study'}
+                  </div>
+                  {data.status && (
+                    <span class="text-[11px] px-2 py-1 rounded-full border border-gray-200 dark:border-gray-700 text-gray-600 dark:text-gray-300">
+                      {data.status}
+                    </span>
+                  )}
+                </div>
+                <h2 class="text-xl md:text-2xl font-semibold mb-2 group-hover:text-primary transition">
+                  {data.title}
+                </h2>
+                {data.subTitle && (
+                  <p class="text-sm md:text-base text-muted mb-4">
+                    {data.subTitle}
+                  </p>
+                )}
+                {data.tags && data.tags.length > 0 && (
+                  <div class="flex flex-wrap gap-2">
+                    {data.tags.slice(0, 5).map((tag) => (
+                      <span class="text-xs px-2 py-1 rounded bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300">
+                        {tag}
+                      </span>
+                    ))}
+                  </div>
+                )}
+              </div>
+            </a>
+          );
+        })}
+      </div>
+    )}
 
     <!-- POC Cards Grid -->
     {pocs.length === 0 ? (
@@ -98,6 +148,31 @@ const categories = [...new Set(pocs.map((p) => p.data.category))];
         <p class="text-lg text-muted">No POCs yet. Check back soon!</p>
       </div>
     ) : (
+      <div class="mb-12">
+        <h2 class="text-2xl md:text-3xl tracking-tight mb-6">AI-assisted POCs</h2>
+        <p class="text-lg md:text-lg text-muted max-w-4xl mb-5">
+          Each project below started as an idea or user insight and quickly became live, testable code using AI tools like ChatGPT and Cursor.
+        </p>
+        <p class="text-lg md:text-xl max-w-4xl">
+          <span class="font-semibold">These are not mockups; they are <em class="italic">real, functional explorations</em> that move design and development forward together, faster.</span>
+        </p>        
+      </div>
+      <div class="mb-10 flex flex-wrap gap-2" id="filter-pills">
+        <button 
+          data-category="all"
+          class="filter-pill px-4 py-2 rounded-full border border-gray-300 dark:border-gray-700 text-sm transition hover:bg-gray-100 dark:hover:bg-gray-800 bg-gray-100 dark:bg-gray-800 font-medium"
+        >
+          All
+        </button>
+        {categories.map((cat) => (
+          <button 
+            data-category={cat}
+            class="filter-pill px-4 py-2 rounded-full border border-gray-300 dark:border-gray-700 text-sm transition hover:bg-gray-100 dark:hover:bg-gray-800"
+          >
+            {cat}
+          </button>
+        ))}
+      </div>
       <div class="grid gap-6" id="poc-grid" style="grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); justify-content: center;">
         {pocs.map((p) => {
           const { data, id } = p;
@@ -174,7 +249,7 @@ const categories = [...new Set(pocs.map((p) => p.data.category))];
           });
           pill.classList.add('bg-gray-100', 'dark:bg-gray-800', 'font-medium');
 
-          // Filter cards
+          // Filter cards (only POCs, not featured)
           pocCards.forEach(card => {
             const cardCategory = card.getAttribute('data-category');
             if (category === 'all' || cardCategory === category) {
@@ -188,4 +263,3 @@ const categories = [...new Set(pocs.map((p) => p.data.category))];
     });
   </script>
 </Layout>
-

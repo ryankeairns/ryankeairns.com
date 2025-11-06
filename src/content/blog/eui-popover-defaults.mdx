@@ -4,10 +4,10 @@ subTitle: "Improving baseline usability across the system"
 description: "A production PR updating default EuiPopover behavior and testing, resolving legacy edge cases and uncovering a hidden bug during debugging."
 date: 2025-10-17
 category: "Design System Evolution"
-tags: ["PR", "EUI", "Accessibility", "Testing", "AI workflow"]
+tags: ["PR", "EUI", "Testing", "AI workflow"]
 status: "PR"
 role: "Principal Designer (IC)"
-impact: "Improved consistency and stability of a core EUI interaction pattern"
+impact: "Improved consistency and design of a core EUI interaction pattern"
 thumb: "~/assets/images/eui-popover-defaults.png"
 priority: 6
 ---
@@ -19,13 +19,13 @@ import euiPopoverBeforeImg from '~/assets/images/eui-popover-before.png';
 > This PR focused on cleaning up long-standing inconsistencies in EuiPopover and, in the process, revealed a hidden bug that had quietly lingered for years.
 
 ## Challenge
-EuiPopover underpins several interactive patterns across Kibana such as menus, tours, and actions. As we set out to modernize our UI, it suggested - and quickly aligned - that we would change the default styling to not show the small arrow along the edge of the panel.
+EuiPopover underpins several interactive patterns across Kibana such as menus, tours, and actions. As we set out to modernize our UI, it was suggested - and quickly aligned - that we change the default styling to not show the small arrow along the edge of the panel.
 
 As is often the case, nothing is so simple in a design system.
 
 <figure class="w-full mb-8">
   <img src={euiPopoverBeforeImg.src} alt="Current EUI popover with arrow." class="w-full rounded-lg" />
-  <figcaption class="mt-2 text-sm text-muted text-center">Current EUI popover with arrow.</figcaption>
+  <figcaption class="mt-2 text-sm text-muted text-center">Current EUI popover with arrow and related bug.</figcaption>
 </figure>
 
 ## Idea
@@ -36,7 +36,7 @@ Instead, a tricky bug surfaced that affected placement of the popover relative t
 ## AI Workflow
 - **ChatGPT** helped audit the component API and summarize how `EuiPopover` props were used across the library.  
 - **Cursor** accelerated implementation — adjusting defaults, refactoring test cases, and suggesting fixes when type errors appeared.  
-- As I ran tests, several unrelated failures surfaced. Digging deeper, I realized I'd uncovered a **but in the score calculation ** that broke Popover positioning.
+- As I ran tests, several unrelated failures surfaced. Digging deeper, I realized I'd uncovered a **bug in the score calculation** that broke Popover positioning.
 - I used Cursor and ChatGPT together to trace the bug — combining diff inspection, logging, and step-through debugging until the underlying issue was clear.  
 - After isolating the cause, I pushed an additional fix that resolved the hidden bug and cleaned up the related end-to-end tests.
 
@@ -47,7 +47,7 @@ Instead, a tricky bug surfaced that affected placement of the popover relative t
 - Improved Cypress test configuration and reliability for future regressions  
 - Created a PR that will modernize popover styles across EUI-based products  
 
-The fix shipped quietly, but its effects are visible everywhere Popover appears — more stable interactions, better keyboard focus, and cleaner teardown.
+The fix will be shipped quietly, but its effects are visible everywhere Popover appears.
 
 <figure class="w-full mb-8">
   <img src={euiPopoverDefaultsImg.src} alt="Redesigned UI popover shown in light and dark mode." class="w-full rounded-lg" />

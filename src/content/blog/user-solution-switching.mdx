@@ -8,25 +8,30 @@ tags: ["POC", "AI workflow", "Kibana", "Personalization", "Platform"]
 status: "POC"
 role: "Principal Designer (IC)"
 impact: "Sparked discussion and research into user-specific solution preferences in shared spaces"
+thumb: "~/assets/images/user-defined-views.png"
 priority: 8
 ---
+
+import userDefinedViewsImg from '~/assets/images/user-defined-views.png';
+import YouTubeVideo from '../../components/YouTubeVideo.astro';
+
+<figure class="w-full mb-8">
+  <img src={userDefinedViewsImg.src} alt="Cue and menu for user to switch solution views." class="w-full rounded-lg" />
+  <figcaption class="mt-2 text-sm text-muted text-center">Cue and menu for user to switch solution views.</figcaption>
+</figure>
 
 > Some proofs of concept exist to ship — others to *start conversations.*  
 > This one was about exploring a bold idea: what if each user could select their own solution view without affecting others in the same space?
 
 ## Challenge
-Through research and observation, we suspected that *user-based solution views* could improve adoption by reducing friction when navigating across Kibana's various solutions.  
-However, the concept was controversial — Spaces are intentionally configured by admins, and changing that relationship risked introducing confusion or permission issues.  
+Through research and observation, we suspected that *user-based solution views* could improve adoption by reducing friction when navigating across Kibana's various solutions. However, the concept was controversial — Spaces are intentionally configured by admins, and changing that relationship risked introducing confusion or permission issues.  
 
-The challenge was to explore personalization while preserving existing admin behavior.  
-Could we offer flexibility for individual users without disrupting how Spaces fundamentally work?
+The challenge was to explore personalization while preserving existing admin behavior. Specifically, could we offer flexibility for individual users without disrupting how Spaces fundamentally work?
 
 ## Idea
-Prototype a way for users to choose their own **solution view** within a shared Space — keeping the Space-level setting intact, but allowing temporary, user-specific overrides.  
-This would make it easier for users who work across solutions (like Observability or Security) to jump into their preferred view without needing admin changes.  
+Prototype a way for users to choose their own **solution view** within a shared Space — keeping the Space-level setting intact, but allowing temporary, user-specific overrides. This would make it easier for users who work across solutions (like Observability or Security) to jump into their preferred view without needing admin changes.  
 
-Knowing the potential complexity, I designed the POC to use existing capabilities — leveraging the same mechanisms behind **"Update space"** to avoid reinventing how the UI reloads or re-renders navigation.  
-The result was surprisingly lightweight: a thin logic layer that handled the view switch while leaving the Space configuration untouched.
+Knowing the potential complexity, I designed the POC to use existing capabilities — leveraging the same mechanisms behind **"Update space"** to avoid reinventing how the UI reloads or re-renders navigation. The result was surprisingly lightweight: a thin logic layer that handled the view switch - and reloading navigation - while leaving the Space configuration untouched.
 
 ## AI Workflow
 - **ChatGPT** helped me reason through potential architectural conflicts and identify safe integration points within Kibana's routing and Space management layers.  
@@ -42,8 +47,14 @@ The result was surprisingly lightweight: a thin logic layer that handled the vie
 - Sparked deeper discussion about **personalization, adoption, and long-term architecture**  
 - Now considered a **candidate for further research and validation**
 
-## Reflection
-This experiment wasn't about shipping code — it was about proving possibility.  
-By approaching the problem with curiosity and respect for existing architecture, I showed that personalization doesn't have to mean upheaval.  
-The POC opened minds and conversations that hadn't been possible before — a reminder that sometimes, design progress starts with showing that an idea *can* work.
+<YouTubeVideo 
+  id="H5jQRvy4Jy8"
+  title="Overview of user-defined solution views POC"
+  autoplay={true}
+  caption="Video walkthrough describing the user flow for the user-defined solution view concept."
+/>
 
+## Reflection
+This experiment wasn't about shipping code — it was about proving possibility. By approaching the problem with curiosity and respect for existing architecture, I showed that personalization doesn't have to mean upheaval.  
+
+The POC opened minds and conversations that hadn't been possible before — a reminder that sometimes, design progress starts with showing that an idea *can* work.

@@ -1,0 +1,106 @@
+---
+title: "Solution Views in Spaces"
+subTitle: "Unifying navigation through clear, solution-based context"
+description: "Redefined Kibana’s Spaces feature to mirror how users think about solutions—improving orientation, reducing redundancy, and aligning the classic experience with Elastic’s modern platform model."
+date: 2024-04-15
+category: "Case Study"
+tags: ["Platform UX", "System Design", "Cross-team Alignment", "Kibana"]
+status: "Shipped"
+role: "Principal Designer (IC)"
+impact: "Unified solution-based navigation across 7+ product areas, improved team orientation, and reduced redundant configuration by consolidating multiple entry points into shared spaces."
+thumb: "~/assets/images/spaces-solution-views.png"
+priority: 1
+featured: true
+caseType: "End-to-End UX"
+---
+
+## 1. Problem Framing
+
+Kibana’s **Spaces** feature allowed admins to separate environments for different data sets or teams — but it didn’t map cleanly to how customers actually understood the product.  
+Users thought in terms of *solutions* (Security, Observability, Cloud) rather than abstract containers called “spaces.”  
+This disconnect led to confusion, fragmented ownership, and inconsistent onboarding across Elastic’s largest solutions.
+
+The **business opportunity** was to adapt the existing Spaces architecture so that customers could navigate Kibana through a clear, solution-based lens — bringing the classic deployment experience closer to the serverless “project-based” model Elastic was promoting for new users.
+
+I led the design direction for this effort, partnering with PMs and engineers across all major solution teams. The stakes were high: if we didn’t solve this, users would continue to experience friction switching between solutions, and Elastic would struggle to deliver a cohesive cross-product story.
+
+---
+
+## 2. Design Process & Decision-Making
+
+We began by auditing how Spaces were being used across different solutions.  
+Through telemetry, internal interviews, and FullStory sessions, we discovered that the confusion wasn’t about *how Spaces worked* — it was about *what they represented*.  
+Most users didn’t realize that Spaces were intended to house solution contexts, not just collections of dashboards.
+
+### Alternatives Considered
+- **Option 1:** Introduce a new “Projects” layer, mimicking the serverless model.  
+- **Option 2:** Visually repurpose Spaces as solution views while preserving their existing behavior.  
+- **Option 3:** Merge Spaces and Solutions into a unified concept.
+
+We chose **Option 2** because it achieved immediate clarity for users without breaking existing admin configurations.  
+It also aligned with leadership’s goal to modernize the classic experience incrementally.
+
+### Key Constraints
+- We couldn’t disrupt existing deployments or lose compatibility with older APIs.  
+- Admins needed full backward compatibility for roles and permissions.  
+- Engineering capacity was limited — any solution had to be lightweight and phased.
+
+### Iteration
+We started with low-fidelity wireframes shared in tight loops with stakeholders, expanding outward as alignment grew.  
+Early prototypes showed that surfacing solution context at the top of the Spaces UI dramatically improved orientation, so we leaned into that concept.  
+Once validated, I built higher-fidelity mockups in Figma and worked with an engineer to deliver a coded prototype for user review.
+
+![Low-fidelity wireframe of Spaces solution views](~/assets/images/user-defined-views.png)
+
+---
+
+## 3. Collaboration & Delivery
+
+This project required close coordination between the Platform, Security, and Observability teams.  
+I led weekly design syncs to align on terminology, data flows, and visual hierarchy.  
+To avoid design-by-committee, I created a **reference prototype** that served as the single source of truth across teams — ensuring consistent implementation and messaging.
+
+We partnered with engineering to integrate the feature behind a flag, rolling it out first to internal users and then to new trials.  
+This allowed us to validate adoption safely before affecting existing customers.  
+I documented patterns, authored a migration guide, and facilitated async feedback loops across time zones to keep velocity high.
+
+One key **trade-off**: we postponed adding user-level customization (user-defined default solution views) to keep the MVP focused and technically feasible.  
+That insight later evolved into a new initiative — *User-Based Solution View Switching* — which became its own exploratory project.
+
+![High-fidelity mockup of solution views in Spaces](~/assets/images/user-defined-views.png)
+
+---
+
+## 4. Impact
+
+The rollout achieved its primary goal: **clarity without disruption**.  
+We successfully reintroduced solution-oriented navigation into the classic deployment experience without creating confusion or breaking admin workflows.
+
+Adoption was steady among new users and trial deployments.  
+Existing customers appreciated that their configurations continued to work unchanged, while new onboarding flows saw higher first-session success rates (based on FullStory task completion metrics).
+
+Beyond quantitative results, the project brought multiple solution teams into a shared design and engineering cadence — a significant cultural win that improved collaboration across Kibana.
+
+If I were to improve this next time, I’d integrate product analytics earlier to capture long-term engagement trends beyond initial adoption.
+
+![FullStory session analysis placeholder](~/assets/images/user-defined-views.png)
+
+---
+
+## 5. Visual Craft & Systems Thinking
+
+Visually, I focused on **clarity and continuity** — aligning the Spaces layout and color system with the upcoming Chrome redesign while introducing subtle cues for solution context.  
+Typography, spacing, and motion timing were refined for better rhythm across views.  
+Accessibility remained a core priority: we standardized color contrast and keyboard navigation patterns inherited from EUI.
+
+This work also established a foundation for future personalization features and reinforced Kibana’s broader design system consistency.
+
+---
+
+## 6. Communication & Storytelling
+
+This project told a clear story: *how aligning product architecture with user mental models can simplify complexity at scale.*  
+By reframing Spaces through the lens of solution ownership, we helped both customers and internal teams speak the same language.  
+It became a model for how the Platform UX team can bridge business direction, user experience, and technical constraints in a single design narrative.
+
+---

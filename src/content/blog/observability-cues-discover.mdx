@@ -1,13 +1,13 @@
 ---
 title: "Observability Cues in Discover"
-subTitle: "Surfacing insights without leaving the search experience"
-description: "A visionary POC that embeds observability signals directly into Kibana's Discover interface, helping users identify patterns and anomalies faster."
+subTitle: "Surfacing relevant features without breaking context"
+description: "A functional POC exploring how Discover could surface Observability tools contextually — helping users stay oriented while bridging cross-solution workflows."
 date: 2025-09-22
-category: "Visionary POCs"
-tags: ["Kibana", "Observability", "Data Visualization", "POC"]
+category: "POCs"
+tags: ["Kibana", "Observability", "Discover", "Cross-Solution UX"]
 status: "POC"
 role: "Principal Designer (IC)"
-impact: "Demonstrated future-state vision for integrated observability"
+impact: "Framed a new UX pattern for contextual feature discovery within Discover"
 thumb: "~/assets/images/product-cues-after.png"
 priority: 0
 ---
@@ -15,163 +15,36 @@ priority: 0
 import productCuesBeforeImg from '~/assets/images/product-cues-before.png';
 import productCuesAfterImg from '~/assets/images/product-cues-after.png';
 
+<img src={productCuesBeforeImg.src} alt="Existing Discover interface with no cross-solution cues" class="w-full rounded-lg mb-8" />
+
+> Users working in Discover often encounter data that relates to Observability features — but there’s no indication that those tools exist.  
+> **This POC** explored subtle, contextual cues that surface when Observability data is detected, helping users discover relevant tools without leaving the experience.
+
 ## Challenge
+Discover is one of Kibana’s most used applications, but it’s siloed from Observability features like Logs, APM, and Alerts. Users viewing logs or traces don’t realize that richer, solution-specific tools exist, and navigating away from Discover interrupts their flow.
 
-Users analyzing logs in Kibana's Discover often miss important patterns because:
-- They're focused on individual events (line-by-line reading)
-- Anomalies and spikes are buried in the timeline
-- No visual cues for high-impact fields
-- Switching to dashboards/visualizations breaks flow
-
-**Key Pain Point:** "I wish Discover would just **tell me** what's interesting in my data."
-
-<figure class="w-full mb-8">
-  <img src={productCuesBeforeImg.src} alt="Current in-product cue is a simple badge." class="w-full rounded-lg" />
-  <figcaption class="mt-2 text-sm text-muted text-center">Current in-product cue is a simple badge.</figcaption>
-</figure>
+The key question:  
+**How might we make Observability features discoverable in-context, based upon currently selected data?**
 
 ## Idea
+Prototype a lightweight cue system that detects relevant fields or datasets and surfaces small entry points to Observability tools.
 
-What if Discover could **surface observability insights automatically**—without users having to build queries or dashboards?
+Examples explored:
+- When viewing a logs index, show a cue like “Switch to Observability to enable...” or "Try Observability"
+- When a `trace.id` field appears, cue to view the trace-augmented flyout.
+- When `service.name` or `error.message` fields are present, display subtle indicators for related Metrics or Alerts information.
 
-**Vision:**
-- **Anomaly indicators** directly in the timeline (spikes, drops, patterns)
-- **Field value highlights** showing unusual or high-cardinality values
-- **Smart suggestions** based on data patterns
-- **Inline visualizations** for key fields
-- **Contextual explanations** ("Error rate spiked 3x in last 15min")
-
-Build a **functional POC** to demonstrate the vision and test technical feasibility.
-
-## AI Workflow
-
-### Concept Development (ChatGPT)
-- Explored anomaly detection algorithms (statistical vs ML-based)
-- Discussed real-time processing constraints
-- Analyzed existing patterns in APM, Logs, and Metrics UIs
-- Generated initial component architecture
-
-### Implementation (Cursor + Manual)
-- Built timeline overlay for anomaly visualization
-- Implemented simple statistical anomaly detection (z-score)
-- Created field value ranking system (cardinality + change rate)
-- Added inline mini-charts for numeric fields
-- Styled contextual insight cards
-- Mocked ML-based suggestions (future capability)
-
-### Validation
-- Tested with real Elasticsearch data (logs, APM traces)
-- Demonstrated to product team and UX researchers
-- Gathered feedback on usefulness vs. noise
-- Identified performance constraints for real-time analysis
+These cues were intentionally minimal — icons, inline links, or hover tooltips — designed to preserve focus while creating awareness of cross-solution capability.
 
 ## Outcome
+- Demonstrated how **Discover can act as a connective surface** for solution features, not just a data viewer.  
+- Helped teams visualize a pattern for **contextual discovery**, which could extend to other solutions beyond Observability.  
+- Sparked discussion around **ownership and visibility rules** — specifically, whether cues should appear by default for all users or be **solution-gated**.  
+- Exposed a broader alignment challenge around *cross-solution UX consistency* and how “discoverability” should scale across Kibana.
 
-**Working POC** demonstrating:
-
-✨ **Smart Timeline:**
-- Visual markers for anomalies (error spikes, traffic drops)
-- Hover tooltips with context ("5x error rate increase")
-- Clickable regions to focus on anomalous time ranges
-
-✨ **Field Insights:**
-- Highlighted fields with unusual values
-- Badge indicators for high cardinality or rapid change
-- Inline sparklines for numeric fields
-
-✨ **Contextual Suggestions:**
-- "Most common error messages in this time range"
-- "New error types appeared 5 minutes ago"
-- "Unusual spike in API latency detected"
-
-**Key Learnings:**
-- Performance: Real-time anomaly detection requires careful optimization
-- UX Balance: Too many insights = noise; need smart filtering
-- Trust: Users want to understand **why** something is flagged as interesting
-- Integration: Works best when connected to ML jobs and alerting
-
-<figure class="w-full mb-8">
-  <img src={productCuesAfterImg.src} alt="Screenshots of smart, data-driven cues taken from POC environment." class="w-full rounded-lg" />
-  <figcaption class="mt-2 text-sm text-muted text-center">Screenshots of smart, data-driven cues taken from POC environment.</figcaption>
-</figure>
+<img src={productCuesAfterImg.src} alt="Prototype showing contextual Observability cues within Discover" class="w-full rounded-lg mb-8" />
 
 ## Reflection
+This POC focused on **bridging awareness** with smart, data-driven cues that brough immediate value. By embedding lightweight cues directly in Discover, we demonstrated that even small visual affordances can reduce cognitive load and connect users to powerful features they might otherwise miss.
 
-### POCs as Vision Communication
-
-This POC wasn't about shipping code—it was about **demonstrating possibility**. By building a functional prototype, I could:
-- Show stakeholders the **feeling** of the experience
-- Validate technical feasibility with engineering
-- Identify UX challenges that mockups would miss
-- Generate excitement and buy-in for future investment
-
-### AI-Assisted Prototyping
-
-**ChatGPT** helped me:
-- Rapidly explore anomaly detection approaches without deep ML expertise
-- Understand statistical methods (z-score, IQR, moving averages)
-- Identify existing Elasticsearch capabilities to leverage
-
-**Cursor** helped me:
-- Implement statistical calculations quickly
-- Generate data transformation logic
-- Build visualization components
-- Debug performance issues
-
-### Balancing Vision and Reality
-
-The POC deliberately included **aspirational features** (ML-powered suggestions) alongside **achievable features** (statistical anomalies). This helped product leadership see both:
-1. What we could ship **soon** (quick wins)
-2. Where we could go **long-term** (strategic vision)
-
-## Supplemental
-
-### Technical Approach
-
-**Anomaly Detection:**
-- Z-score analysis on time-series aggregations
-- Sliding window for baseline comparison (30min windows)
-- Threshold tuning based on data density
-- Placeholder integration with Elasticsearch ML jobs
-
-**Performance Considerations:**
-- Aggregations run on sampled data for speed
-- Caching for repeated queries
-- Progressive enhancement (load insights after initial results)
-- WebWorkers for client-side calculations
-
-### Design Principles
-
-1. **Non-intrusive:** Insights are additive, don't block core workflow
-2. **Explainable:** Every insight includes context and reasoning
-3. **Actionable:** Clicking an insight filters/focuses the data
-4. **Trustworthy:** Visual confidence indicators (low/medium/high certainty)
-
-### User Feedback (Internal Testing)
-
-> "This would have saved me 20 minutes this morning. I was manually hunting for error spikes." — SRE user
-
-> "Love the field highlights. I never think to check cardinality changes." — Support engineer
-
-> "Needs tuning—too many 'insights' on high-volume data—but the concept is solid." — Product manager
-
-### Future Enhancements (Identified Through POC)
-
-- **ML Integration:** Connect to Elasticsearch anomaly detection jobs
-- **Customization:** Let users tune sensitivity and which insights to show
-- **Collaboration:** Share insights with team (link to specific anomaly)
-- **Historical Context:** Compare current anomalies to past patterns
-- **Root Cause Suggestions:** "This spike correlates with deployment X"
-
-### Lessons Learned
-
-1. **Build to learn:** This POC revealed performance constraints early
-2. **Vision POCs need polish:** Even non-production code needs good UX to communicate vision
-3. **Stakeholder demos matter:** Live demo generated more excitement than slide decks ever could
-4. **Document learnings:** POC value extends beyond the code—capture insights for future teams
-
-### Links
-- [POC Demo Video](#) *(placeholder)*
-- [Technical Spike Document](#) *(placeholder)*
-- [Product Team Presentation](#) *(placeholder)*
-
+The project also revealed how small UX experiments can uncover deeper strategic questions — in this case, around product boundaries and visibility models that shape the user’s perception of what Kibana can do.

@@ -7,7 +7,7 @@ category: "Visionary POCs"
 tags: ["POC", "AI workflow", "Kibana", "Platform", "Content Management"]
 status: "POC"
 role: "Principal Designer (IC)"
-impact: "Revived multi-year design concepts and revealed architectural gaps in Kibana's content framework"
+impact: "Revived multi-year design concepts and revealed architectural gaps in Kibana's content framework. Resulted in skunkwerks project to begin actual development."
 thumb: "~/assets/images/dynamic-home-after.png"
 priority: 9
 ---
@@ -20,11 +20,9 @@ import dynamicHomeAfterImg from '~/assets/images/dynamic-home-after.png';
 > This project showed what happens when AI closes that gap.
 
 ## Challenge
-For years, designers across the Platform and solution teams had shared concepts for making Kibana's home pages — Discover, Dashboard, and the main entry point — more dynamic and relevant.  
-The vision was to surface user-specific content such as "recent dashboards," "saved searches," or contextual entry points based on the data they worked with most.  
+For years, designers across the Platform and solution teams had shared concepts for making Kibana's home page more dynamic and relevant. The vision was to surface user-specific content such as "recent dashboards," "saved searches," or contextual entry points based on the data they worked with most.  
 
-Everyone agreed it was a good idea. It just never made it to the top of the roadmap.  
-Without engineering time to prototype it, the concept sat untouched in Figma files and old Slack threads.
+Everyone agreed it was a good idea. It just never made it to the top of the roadmap. Without engineering time to prototype it, the concept sat untouched in Figma files, GitHub issues, and old Slack threads.
 
 <figure class="w-full mb-8">
   <img src={dynamicHomeBeforeImg.src} alt="Current Kibana home page with only static content" class="w-full rounded-lg" />
@@ -32,11 +30,11 @@ Without engineering time to prototype it, the concept sat untouched in Figma fil
 </figure>
 
 ## Idea
-Revisit the original ideas and rebuild them as working, in-product proofs of concept using AI-assisted coding.  
+Revisit the original ideas and rebuild them as working, in-product proofs of concept using AI-assisted coding. 
+
 My goal was to show that *personalized home pages* weren't just design aspirations — they could be real, functional, and achievable within the existing Kibana architecture.  
 
-I used ChatGPT to help sketch the architecture and Cursor to scaffold live prototypes in a local Kibana instance.  
-Within a few short demos, I had fully functional examples showing dynamic content based on user context — all running in code, not mockups.
+I used ChatGPT to help sketch the architecture and Cursor to scaffold live prototypes in a local Kibana instance. Within a few short demos, I had fully functional examples showing dynamic content based on user context — all running in code, not mockups.
 
 <figure class="w-full mb-8">
   <img src={dynamicHomeDesignImg.src} alt="Redesigned Kibana home page with dynamic content" class="w-full rounded-lg" />
@@ -45,7 +43,7 @@ Within a few short demos, I had fully functional examples showing dynamic conten
 
 ## AI Workflow
 - **ChatGPT** helped identify where and how the home page components were rendered, how content modules were fetched, and where new data hooks could integrate safely.  
-- **Cursor** handled scaffolding the POC components, wiring up conditional content, and debugging rendering and routing issues.  
+- **Cursor** handled scaffolding the POC components, wiring into existing services, and debugging rendering and routing issues.  
 - I iterated directly inside a **live Kibana instance**, creating multiple prototype versions to demonstrate different personalization strategies.  
 - AI tools made it possible to move from *idea to working demo* in days — something that had sat dormant for *years*.  
 - Presented the prototypes to the **entire Platform team**, sparking discussion around new content management capabilities and where they should live.

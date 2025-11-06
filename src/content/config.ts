@@ -76,12 +76,14 @@ const blogCollection = defineCollection({
     updated: z.date().optional(),
     category: z.string(), // e.g., "Design System Evolution"
     tags: z.array(z.string()).default([]),
-    status: z.enum(['POC', 'PR', 'Merged', 'Draft']).default('POC'),
+    status: z.enum(['POC', 'PR', 'Merged', 'Draft', 'In Progress']).default('POC'),
     role: z.string().optional(),
     impact: z.string().optional(),
     thumb: z.string().optional(), // card thumbnail
     hero: z.string().optional(),
     priority: z.number().optional(),
+    featured: z.boolean().optional(), // for featured case studies
+    caseType: z.string().optional(), // e.g., "End-to-End UX", "System Design"
     
     // SEO
     canonical: z.string().optional(),
