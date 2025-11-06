@@ -1,7 +1,7 @@
 ---
 title: "EUI Flyout System"
-subTitle: "Systemizing a consistent, accessible flyout experience"
-description: "Created a unified flyout framework that standardizes structure, motion, and accessibility across Kibana—eliminating pattern drift and accelerating adoption across multiple solutions."
+subTitle: “Aligning flyout behavior, flow, and content across Kibana”
+description: “Standardized the interaction and content patterns that define how flyouts work — reducing friction for both users and developers.”
 date: 2025-02-10
 category: "Case Study"
 tags: ["Design Systems", "EUI", "Accessibility", "Pattern Architecture", "Platform UX"]
@@ -14,15 +14,15 @@ featured: true
 caseType: "System Design"
 ---
 
+import flyoutInteractionGif from '~/assets/images/flyout-system-prototype.gif';
+
 ## 1. Problem Framing
 
-Users across Elastic’s solutions—Security, Observability, and Cloud—were interacting with flyouts that behaved differently depending on where they originated.  
-These inconsistencies broke task flow and caused confusion when users moved between applications. For developers, maintaining several bespoke implementations meant redundant code and frequent regressions.
+Users across Elastic’s solutions were interacting with flyouts that behaved differently depending on where they originated. These inconsistencies broke task flow and caused confusion when users moved between applications. For developers, maintaining several bespoke implementations meant redundant code and frequent regressions.
 
-The **business opportunity** was clear: consolidating flyouts into a unified system could improve usability while reducing maintenance and accelerating feature delivery.  
-This work began as part of the **Discover extension framework**, where Security’s flyout was particularly complex, persisting investigative context as users drilled into data. I recognized that as Discover adoption spread, these inconsistencies would scale too.
+The **business opportunity** was clear: consolidating flyouts into a unified system could improve usability while reducing maintenance and accelerating feature delivery. This work began as part of the **Discover extension framework**, where Security’s flyout was particularly complex, persisting investigative context as users drilled into data.
 
-I led design direction from the Platform UX team, partnering with Shared UX and EUI engineers to define a single, extensible pattern before this fragmentation became entrenched.
+I led design direction from the Platform UX team, partnering with Shared UX and EUI engineers to define a scalable system including new patterns and documentation.
 
 ---
 
@@ -32,62 +32,57 @@ I began by auditing every existing flyout across Kibana, mapping differences in 
 Several alternative paths emerged:  
 - **Option 1:** standardize surface styling only (low impact, minimal disruption)  
 - **Option 2:** build a shared base component with opt-in behavior  
-- **Option 3:** create a fully composable system with defined regions and lifecycle hooks  
+- **Option 3:** create a fully composable system with defined regions and state management
 
-We chose **Option 3** for long-term scalability despite higher short-term complexity.  
-The guiding principles were **consistency, composability, and clarity**—the system had to support both simple detail views and deeply interactive workflows.
+We chose **Option 3** for long-term scalability despite higher short-term complexity. The guiding principles were **consistency, composability, and clarity**—the system had to support both simple detail views and deeply interactive workflows.
 
-Early prototypes revealed that nested flyouts added cognitive load, so we dropped that direction. Instead, we established interaction constraints to preserve hierarchy and focus management.  
-Time and technical debt were real constraints, so we scoped accessibility improvements and transition polish into phase two to keep momentum.
+Early prototypes revealed that nested flyouts added cognitive load, so we dropped that direction. Instead, we established interaction constraints to preserve hierarchy and focus management. Time and technical debt were real constraints, so we scoped accessibility improvements and transition polish into phase two to keep momentum.
 
 To support designers, I created reusable **Figma components** and UX guidelines covering structure, focus handling, and motion timing.  
 An AI-assisted audit helped surface undocumented variants across the codebase for migration planning.
 
-![Low-fidelity wireframe of flyout layout](~/assets/images/user-defined-views.png)
+![Low-fidelity wireframe of flyout layout](~/assets/images/flyout-system-wireframes.png)
+
+<figure class="w-full max-w-5xl mb-8">
+  <img src={flyoutInteractionGif.src} alt="Figma interaction prototype for new flyout system" class="w-full rounded-lg" />
+  <figcaption class="mt-2 text-sm text-muted text-center">Figma interaction prototype for new flyout system.</figcaption>
+</figure>
 
 ---
 
 ## 3. Collaboration & Delivery
 
-At an Elastic offsite, this became a focused round-table initiative. I facilitated sessions between Shared UX and EUI engineering to align on priorities and dependencies.  
-Working closely with a PM and two engineers—including a tech lead—I delivered interaction prototypes, Figma specs, and a detailed PRD within a GitHub issue.
+At an Elastic offsite, this became a focused round-table initiative. I facilitated sessions between Shared UX and EUI engineering to align on priorities and dependencies. Working closely with a PM and two engineers—including a tech lead—I delivered interaction prototypes, Figma specs, and a detailed PRD within a GitHub issue.
 
-We negotiated trade-offs along the way. For example, advanced animation states were postponed to phase two in exchange for faster delivery of the core API.  
-I defined phased milestones so engineers could ship incremental improvements without waiting for the full system to be complete—ensuring steady value delivery and team engagement.
+We negotiated trade-offs along the way. For example, advanced animation states were postponed to phase two in exchange for faster delivery of the core API. I defined phased milestones so engineers could ship incremental improvements without waiting for the full system to be complete—ensuring steady value delivery and team engagement.
 
-![High-fidelity mockup of the standardized flyout](~/assets/images/user-defined-views.png)
+![Flyout system docs and enablement materials](~/assets/images/flyout-system-docs.png)
 
 ---
 
 ## 4. Impact
 
-The new flyout system has been **merged into EUI** and is already gaining adoption.  
-Engineers who maintained custom flyouts—particularly in Security—reported that the new framework is *easier to implement and extend* than their legacy version.  
-Teams like Observability have begun integrating it immediately, enabling consistent experiences and faster prototyping.
+The new flyout system has been **merged into EUI** and is already gaining adoption. Engineers who maintained custom flyouts—particularly in Security—reported that the new framework is *easier to implement and extend* than their legacy version. Teams like Observability have begun integrating it immediately, enabling consistent experiences and faster prototyping.
 
-From a platform perspective, impact is measured by **developer satisfaction, adoption, and reduced redundancy**, rather than direct user analytics.  
-Early indicators show strong internal uptake and positive sentiment from engineering partners.
+From a platform perspective, impact is measured by **developer satisfaction, adoption, and reduced redundancy**, rather than direct user analytics. Early indicators show strong internal uptake and positive sentiment from engineering partners.
 
-If I were to adjust anything next time, I’d integrate QA and a11y testing earlier in the rollout cycle to shorten post-merge iteration loops.
-
-![Internal adoption chart placeholder](~/assets/images/user-defined-views.png)
+If I were to adjust anything next time, I’d integrate testing more frequently during the build and rollout cycles to maintain internal awareness.
 
 ---
 
 ## 5. Visual Craft & Systems Thinking
 
-Refining the visual and interaction language was as critical as standardizing the structure.  
-I focused on maintaining **hierarchy and rhythm** through consistent header spacing, typography, and motion curves across panel sizes.  
-We applied accessibility color tokens and contrast rules directly from EUI’s theming system to ensure every implementation passed WCAG AA standards.
+The main focus was aligning how flyouts behave and what they contain, not how they look. We standardized interaction flows — how users open, navigate, and close panels — and clarified when to use flyouts versus pages or modals. Content patterns were unified around clear hierarchies: consistent header structures, primary actions, and contextual help placement.
 
-Attention to scalability and long-term maintenance guided every decision—the system was built to evolve with future Kibana redesigns without rework.
+Visual refinements supported those changes, but the real outcome was a cohesive interaction model that teams across Kibana could apply confidently. All this on top of the existing `EuiFlyout` component while avoiding breaking changes.
+
+![Flyout system final visual design](~/assets/images/flyout-system-after.png)
 
 ---
 
 ## 6. Communication & Storytelling
 
-This project reinforced that **system design is narrative design**—the story of how small inconsistencies ripple into large-scale UX fragmentation.  
-By visualizing the pattern family, aligning teams, and codifying reusable guidance, I turned what had been ad-hoc design into an extensible framework that now anchors multiple products.
+This project reinforced that **system design is narrative design**—the story of how small inconsistencies ripple into large-scale UX fragmentation. By visualizing the pattern family, aligning teams, and codifying reusable guidance, I turned what had been ad-hoc design into an extensible framework that now anchors multiple products.
 
 Ultimately, this work demonstrated that when design systems solve foundational interaction problems, they multiply value across every team that builds on them.
 

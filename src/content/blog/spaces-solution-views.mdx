@@ -5,14 +5,16 @@ description: "Redefined Kibana’s Spaces feature to mirror how users think abou
 date: 2024-04-15
 category: "Case Study"
 tags: ["Platform UX", "System Design", "Cross-team Alignment", "Kibana"]
-status: "Shipped"
+status: "POC"
 role: "Principal Designer (IC)"
-impact: "Unified solution-based navigation across 7+ product areas, improved team orientation, and reduced redundant configuration by consolidating multiple entry points into shared spaces."
+impact: "Unified solution-based navigation across multiple product areas, improved team orientation, and increased solution view adoption by 2%."
 thumb: "~/assets/images/spaces-solution-views.png"
 priority: 1
 featured: true
 caseType: "End-to-End UX"
 ---
+
+import YouTubeVideo from '../../components/YouTubeVideo.astro';
 
 ## 1. Problem Framing
 
@@ -28,9 +30,16 @@ I led the design direction for this effort, partnering with PMs and engineers ac
 
 ## 2. Design Process & Decision-Making
 
-We began by auditing how Spaces were being used across different solutions.  
-Through telemetry, internal interviews, and FullStory sessions, we discovered that the confusion wasn’t about *how Spaces worked* — it was about *what they represented*.  
-Most users didn’t realize that Spaces were intended to house solution contexts, not just collections of dashboards.
+We began by auditing how Spaces were being used across different solutions. Through telemetry, internal interviews, and FullStory sessions, we discovered that the confusion wasn’t about *how Spaces worked* — it was about *what they represented*.  
+
+To begin, we would clean up the user experience for Spaces to create a stable foundation for solution views.
+
+<YouTubeVideo 
+  id="TxhAE5MgpRY"
+  title="Overview of spaces redesign"
+  autoplay={true}
+  caption="Video walkthrough describing the spaces redesign to prep for solution views."
+/>
 
 ### Alternatives Considered
 - **Option 1:** Introduce a new “Projects” layer, mimicking the serverless model.  
@@ -46,61 +55,49 @@ It also aligned with leadership’s goal to modernize the classic experience inc
 - Engineering capacity was limited — any solution had to be lightweight and phased.
 
 ### Iteration
-We started with low-fidelity wireframes shared in tight loops with stakeholders, expanding outward as alignment grew.  
-Early prototypes showed that surfacing solution context at the top of the Spaces UI dramatically improved orientation, so we leaned into that concept.  
-Once validated, I built higher-fidelity mockups in Figma and worked with an engineer to deliver a coded prototype for user review.
+We started with low-fidelity wireframes shared in tight loops with stakeholders, expanding outward as alignment grew. Early prototypes showed that surfacing solution context at the top of the Spaces UI dramatically improved orientation, so we leaned into that concept.  
 
-![Low-fidelity wireframe of Spaces solution views](~/assets/images/user-defined-views.png)
+![Low-fidelity wireframe of Spaces solution views](~/assets/images/spaces-views-wireframes.png)
+
+Once validated, we moved to higher-fidelity mockups in Figma and worked with an engineer to deliver a coded prototype for user review.
 
 ---
 
 ## 3. Collaboration & Delivery
 
-This project required close coordination between the Platform, Security, and Observability teams.  
-I led weekly design syncs to align on terminology, data flows, and visual hierarchy.  
-To avoid design-by-committee, I created a **reference prototype** that served as the single source of truth across teams — ensuring consistent implementation and messaging.
+This project required close coordination between the Platform and solution teams. I led weekly design syncs to align on terminology, data flows, and visual hierarchy. To avoid design-by-committee, I created a **reference prototype** that served as the single source of truth across teams — ensuring consistent implementation and messaging.
 
-We partnered with engineering to integrate the feature behind a flag, rolling it out first to internal users and then to new trials.  
-This allowed us to validate adoption safely before affecting existing customers.  
-I documented patterns, authored a migration guide, and facilitated async feedback loops across time zones to keep velocity high.
+We partnered with engineering to integrate the feature behind a flag, rolling it out first to internal users and then to new trials. This allowed us to validate adoption safely before affecting existing customers. 
 
-One key **trade-off**: we postponed adding user-level customization (user-defined default solution views) to keep the MVP focused and technically feasible.  
-That insight later evolved into a new initiative — *User-Based Solution View Switching* — which became its own exploratory project.
+One key **trade-off**: we postponed adding user-level customization (user-defined default solution views) to keep the MVP focused and technically feasible. That insight later evolved into a new POC — [*User-Based Solution View Switching*](./user-solution-switching) — which became its own exploratory project.
 
-![High-fidelity mockup of solution views in Spaces](~/assets/images/user-defined-views.png)
+![High-fidelity mockup of solution views in Spaces](~/assets/images/spaces-ux-after.png)
 
 ---
 
 ## 4. Impact
 
-The rollout achieved its primary goal: **clarity without disruption**.  
-We successfully reintroduced solution-oriented navigation into the classic deployment experience without creating confusion or breaking admin workflows.
+The rollout achieved its primary goals: **clarity without disruption and increased adoption**. We successfully reintroduced a new user experience for Spaces, followed by solution-oriented views, for the classic deployment experience without creating confusion or breaking admin workflows.
 
-Adoption was steady among new users and trial deployments.  
-Existing customers appreciated that their configurations continued to work unchanged, while new onboarding flows saw higher first-session success rates (based on FullStory task completion metrics).
+Adoption was steady among new users and trial deployments. Existing customers appreciated that their configurations continued to work unchanged, while new onboarding flows saw higher first-session success rates (based on FullStory task completion metrics).
 
 Beyond quantitative results, the project brought multiple solution teams into a shared design and engineering cadence — a significant cultural win that improved collaboration across Kibana.
 
-If I were to improve this next time, I’d integrate product analytics earlier to capture long-term engagement trends beyond initial adoption.
-
-![FullStory session analysis placeholder](~/assets/images/user-defined-views.png)
 
 ---
 
 ## 5. Visual Craft & Systems Thinking
 
-Visually, I focused on **clarity and continuity** — aligning the Spaces layout and color system with the upcoming Chrome redesign while introducing subtle cues for solution context.  
-Typography, spacing, and motion timing were refined for better rhythm across views.  
-Accessibility remained a core priority: we standardized color contrast and keyboard navigation patterns inherited from EUI.
+The focus was on creating a scalable layout system that could adapt as new solutions and use cases were added. Rather than styling differences, the visual adjustments centered on hierarchy, grouping, and contextual clarity — ensuring that users could understand which solution context they were in, even as content changed dynamically.
 
-This work also established a foundation for future personalization features and reinforced Kibana’s broader design system consistency.
+Patterns established here informed later work on solution switching, home page layouts, and cross-app navigation consistency across Kibana. This was less about decoration and more about systemic cohesion — ensuring that multiple teams could extend the pattern without fragmenting the experience.
 
 ---
 
 ## 6. Communication & Storytelling
 
 This project told a clear story: *how aligning product architecture with user mental models can simplify complexity at scale.*  
-By reframing Spaces through the lens of solution ownership, we helped both customers and internal teams speak the same language.  
-It became a model for how the Platform UX team can bridge business direction, user experience, and technical constraints in a single design narrative.
+
+By reframing Spaces through the lens of solution ownership, we helped both customers and internal teams speak the same language. It became a model for how the Platform UX team can bridge business direction, user experience, and technical constraints in a single design narrative.
 
 ---
