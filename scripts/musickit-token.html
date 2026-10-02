@@ -1,0 +1,116 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Apple Music user token</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <style>
+      body {
+        margin: 0 auto;
+        padding: 3rem 1.25rem;
+        max-width: 40rem;
+        background: #1c1b19;
+        color: #e8e3da;
+        font: 15px/1.6 ui-sans-serif, system-ui, sans-serif;
+      }
+      h1 {
+        font-size: 1.1rem;
+      }
+      p,
+      li {
+        color: #a9a294;
+      }
+      code {
+        color: #e8e3da;
+      }
+      textarea {
+        width: 100%;
+        margin-top: 0.35rem;
+        padding: 0.6rem;
+        background: #2a2825;
+        color: #e8e3da;
+        border: 1px solid rgba(246, 243, 236, 0.16);
+        border-radius: 3px;
+        font-family: ui-monospace, monospace;
+        font-size: 0.8rem;
+      }
+      button {
+        margin-top: 1rem;
+        padding: 0.55rem 1rem;
+        background: #e2b56a;
+        color: #1c1b19;
+        border: 0;
+        border-radius: 3px;
+        font: inherit;
+        font-weight: 600;
+        cursor: pointer;
+      }
+      button:disabled {
+        opacity: 0.5;
+        cursor: default;
+      }
+      .status {
+        min-height: 1.5rem;
+      }
+      :focus-visible {
+        outline: 2px solid #e2b56a;
+        outline-offset: 3px;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Apple Music user token</h1>
+    <p>
+      Sign in with the Apple ID whose listening history should appear on the site, then copy the
+      token below into <code>APPLE_MUSIC_USER_TOKEN</code> in <code>.env</code>.
+    </p>
+    <p class="status" id="status">Loading developer token…</p>
+    <button id="authorize" type="button" disabled>Sign in to Apple Music</button>
+    <p>
+      <label for="user-token">Music user token</label>
+      <textarea id="user-token" rows="5" readonly></textarea>
+    </p>
+    <script src="https://js-cdn.music.apple.com/musickit/v3/musickit.js"></script>
+    <script>
+      const status = document.getElementById('status');
+      const button = document.getElementById('authorize');
+      const output = document.getElementById('user-token');
+      let developerToken = '';
+
+      async function init() {
+        try {
+          const response = await fetch('/developer-token');
+          if (!response.ok) throw new Error(`Token request failed (${response.status})`);
+          developerToken = (await response.text()).trim();
+          status.textContent = 'Developer token ready.';
+          button.disabled = false;
+        } catch (error) {
+          status.textContent = `Could not load the developer token. ${error.message}`;
+        }
+      }
+
+      button.addEventListener('click', async () => {
+        button.disabled = true;
+        status.textContent = 'Opening Apple Music sign-in…';
+        try {
+          await MusicKit.configure({
+            developerToken,
+            app: { name: 'ryankeairns.com', build: '1.0.0' },
+          });
+          const music = MusicKit.getInstance();
+          const token = await music.authorize();
+          output.value = token || music.musicUserToken || '';
+          status.textContent = output.value
+            ? 'Copy the token below into .env, then stop the server.'
+            : 'Authorization returned no token. Try again.';
+        } catch (error) {
+          status.textContent = `Authorization failed. ${error.message}`;
+        } finally {
+          button.disabled = false;
+        }
+      });
+
+      init();
+    </script>
+  </body>
+</html>

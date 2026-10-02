@@ -1,0 +1,13 @@
+---
+import { introduction } from '~/data/profile';
+
+const { contributions } = introduction;
+---
+
+<div class="intro">
+  <p class="lead">{introduction.lead}</p>
+  {introduction.paragraphs.map((paragraph) => <p>{paragraph}</p>)}
+  <p>
+    {contributions.summary} <a href={contributions.href}>{contributions.label}</a>.
+  </p>
+</div>

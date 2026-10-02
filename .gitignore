@@ -17,5 +17,8 @@ pnpm-debug.log*
 .env
 .env.production
 
+# Apple Music private keys
+*.p8
+
 # macOS-specific files
 .DS_Store

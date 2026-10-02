@@ -1,0 +1,32 @@
+---
+import { Image } from 'astro:assets';
+import portrait from '~/assets/images/portrait.png';
+import { profile } from '~/data/profile';
+---
+
+<header class="identity">
+  <Image
+    src={portrait}
+    alt=""
+    width={112}
+    height={112}
+    densities={[2]}
+    class="portrait"
+    loading="eager"
+    fetchpriority="high"
+  />
+  <div class="identity-text">
+    <h1 class="name">{profile.name}</h1>
+    <p class="title">{profile.title}</p>
+    <p class="location">{profile.location}</p>
+    <ul class="links">
+      {
+        profile.links.map((link) => (
+          <li>
+            <a href={link.href}>{link.label}</a>
+          </li>
+        ))
+      }
+    </ul>
+  </div>
+</header>

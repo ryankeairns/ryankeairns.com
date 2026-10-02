@@ -1,0 +1,23 @@
+---
+import { latestTrack } from '~/data/listening';
+
+const { title, artist, url, artwork } = latestTrack;
+const Row = url ? 'a' : 'span';
+---
+
+<li class="now-row">
+  <Row class="track" href={url || undefined}>
+    {
+      artwork ? (
+        <img class="now-icon art" src={artwork} alt="" width="36" height="36" loading="lazy" />
+      ) : (
+        <span class="now-icon art" aria-hidden="true" />
+      )
+    }
+    <span class="now-copy">
+      <span class="sr-only">Last listened on Apple Music: </span>
+      <span class="track-title">{title}</span>
+      <span class="track-artist">{artist}</span>
+    </span>
+  </Row>
+</li>

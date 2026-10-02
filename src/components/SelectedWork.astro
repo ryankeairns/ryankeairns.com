@@ -1,0 +1,17 @@
+---
+import { selectedWork } from '~/data/work';
+---
+
+<section class="section" aria-labelledby="selected-work-heading">
+  <h2 id="selected-work-heading">Selected work</h2>
+  <dl class="contributions">
+    {
+      selectedWork.map((item) => (
+        <div class="contribution">
+          <dt>{item.area}</dt>
+          <dd>{item.description}</dd>
+        </div>
+      ))
+    }
+  </dl>
+</section>

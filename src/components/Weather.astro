@@ -1,0 +1,18 @@
+---
+import { profile } from '~/data/profile';
+---
+
+<li class="now-row" data-weather>
+  <span class="now-icon weather-icon" data-weather-icon aria-hidden="true"></span>
+  <span class="now-copy">
+    <span class="sr-only">Weather in </span>{profile.location}<span
+      class="weather-reading"
+      data-weather-text
+      aria-live="polite"></span>
+  </span>
+</li>
+
+<script>
+  import { mountWeather } from '~/scripts/weather';
+  mountWeather();
+</script>

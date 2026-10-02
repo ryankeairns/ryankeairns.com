@@ -1,0 +1,16 @@
+---
+import Weather from '~/components/Weather.astro';
+import Listening from '~/components/Listening.astro';
+import { latestTrack } from '~/data/listening';
+
+/** Hidden while the track is placeholder data. See README → Apple Music. */
+const showListening = !latestTrack.placeholder;
+---
+
+<section class="section" aria-labelledby="currently-heading">
+  <!-- <h2 id="currently-heading">Currently</h2> -->
+  <ul class="now">
+    <Weather />
+    {showListening && <Listening />}
+  </ul>
+</section>

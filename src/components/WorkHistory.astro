@@ -1,0 +1,31 @@
+---
+import { current, earlierCareer, previous } from '~/data/work';
+---
+
+<section class="section" aria-labelledby="work-heading">
+  <h2 id="work-heading">Work</h2>
+
+  <div class="role">
+    <h3>
+      {current.url ? <a href={current.url}>{current.company}</a> : current.company}
+    </h3>
+    <p class="role-meta">{current.role} · {current.dates}</p>
+    {current.paragraphs?.map((paragraph) => <p class="role-summary">{paragraph}</p>)}
+  </div>
+
+  <h3 class="subhead">Previously</h3>
+  <ul class="previous">
+    {
+      previous.map((entry) => (
+        <li>
+          <span class="previous-company">
+            {entry.url ? <a href={entry.url}>{entry.company}</a> : entry.company}
+            {entry.role && <span class="previous-role">{entry.role}</span>}
+          </span>
+          <span class="previous-dates">{entry.dates}</span>
+        </li>
+      ))
+    }
+  </ul>
+  <p class="role-summary">{earlierCareer}</p>
+</section>
