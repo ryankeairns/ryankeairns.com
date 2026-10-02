@@ -22,12 +22,10 @@ html {
 
 body {
   display: flow-root;
+  isolation: isolate;
   margin: 0;
   min-height: 100vh;
-  background:
-    radial-gradient(90% 55% at 8% -8%, rgba(65, 90, 119, 0.28), transparent 52%),
-    radial-gradient(70% 45% at 100% 0%, rgba(27, 38, 59, 0.65), transparent 48%),
-    var(--bg);
+  background: transparent;
   color: var(--text);
   font-family: ui-sans-serif, system-ui, sans-serif;
   font-size: 0.9375rem;
@@ -36,6 +34,25 @@ body {
   letter-spacing: -0.011em;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
+}
+
+body::before {
+  content: '';
+  position: fixed;
+  inset: -25%;
+  z-index: -1;
+  background:
+    radial-gradient(42% 36% at 18% 20%, rgba(65, 90, 119, 0.55), transparent 62%),
+    radial-gradient(36% 42% at 88% 8%, rgba(119, 141, 169, 0.34), transparent 58%),
+    radial-gradient(50% 45% at 70% 90%, rgba(27, 38, 59, 0.8), transparent 60%);
+  animation: swell 18s ease-in-out infinite alternate;
+  pointer-events: none;
+}
+
+@keyframes swell {
+  to {
+    transform: translate3d(-16%, 12%, 0) rotate(-8deg) scale(1.18);
+  }
 }
 
 .skip {
@@ -371,5 +388,9 @@ a.track:hover .track-title {
 @media (prefers-reduced-motion: reduce) {
   a {
     transition: none;
+  }
+
+  body::before {
+    animation: none;
   }
 }
