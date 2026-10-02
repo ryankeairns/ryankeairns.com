@@ -16,7 +16,7 @@ export const introduction = {
   ],
   contributions: {
     summary:
-      'More than 200 pull requests to Kibana, the largest single-application TypeScript codebase on GitHub.',
+      'Hundreds of pull requests to EUI and Kibana, the largest single-application TypeScript codebase on GitHub.',
     href: 'https://github.com/search?q=is%3Apr+author%3Aryankeairns+org%3Aelastic&type=pullrequests',
     label: 'See the pull requests',
   },

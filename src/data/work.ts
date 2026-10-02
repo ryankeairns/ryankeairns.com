@@ -78,4 +78,4 @@ export const previous: Role[] = [
 ];
 
 export const earlierCareer =
-  'Before that, a decade of front-end and back-end development work that still shapes how I design.';
+  'Preceded by a decade of front-end and back-end development work that still shapes how I design.';

@@ -1,11 +1,11 @@
 :root {
-  --bg: #1c1b19;
-  --heading: #f6f3ec;
-  --text: #e8e3da;
-  --muted: #a9a294;
-  --line: rgba(246, 243, 236, 0.12);
-  --accent: #e2b56a;
-  --art: #2a2825;
+  --bg: #0d1b2a;
+  --heading: #778da9;
+  --text: #e0e1dd;
+  --muted: #415a77;
+  --line: rgba(119, 141, 169, 0.12);
+  --accent: #778da9;
+  --art: #1b263b;
   --column: 34rem;
   color-scheme: dark;
 }
@@ -62,10 +62,10 @@ body {
 }
 
 .portrait {
-  width: 112px;
-  height: 112px;
+  width: 128px;
+  height: 128px;
   flex: none;
-  border-radius: 4px;
+  border-radius: 16px;
   object-fit: cover;
   background: var(--art);
 }
@@ -78,6 +78,7 @@ body {
 .name,
 .section h2,
 .role h3,
+.previous-company,
 .lead {
   color: var(--heading);
   font-weight: 600;
@@ -86,8 +87,10 @@ body {
 
 .name {
   margin: 0;
-  font-size: 0.9375rem;
+  font-size: 1.25rem;
   line-height: 1.35;
+  font-weight: bold;
+  letter-spacing: -0.012em;
 }
 
 .title,
@@ -102,7 +105,7 @@ body {
   display: flex;
   flex-wrap: wrap;
   gap: 0.35rem 0.9rem;
-  margin: 0.45rem 0 0;
+  margin: 1rem 0 0;
   padding: 0;
   list-style: none;
   font-size: 0.875rem;
@@ -142,7 +145,8 @@ body {
   line-height: 1.35;
 }
 
-.role h3 {
+.role h3,
+.previous-company {
   margin: 0;
   font-size: 0.9375rem;
   line-height: 1.35;
