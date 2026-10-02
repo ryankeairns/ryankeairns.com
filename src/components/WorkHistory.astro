@@ -1,4 +1,6 @@
 ---
+import { Image } from 'astro:assets';
+import elasticLogo from '~/assets/images/elastic-logo.png';
 import { current, earlierCareer, previous } from '~/data/work';
 ---
 
@@ -6,10 +8,22 @@ import { current, earlierCareer, previous } from '~/data/work';
   <h2 id="work-heading">Work</h2>
 
   <div class="role">
-    <h3>
-      {current.url ? <a href={current.url}>{current.company}</a> : current.company}
-    </h3>
-    <p class="role-meta">{current.role} · {current.dates}</p>
+    <div class="role-identity">
+      <Image
+        src={elasticLogo}
+        alt=""
+        width={56}
+        height={56}
+        densities={[2]}
+        class="role-logo"
+      />
+      <div class="identity-text">
+        <h3>
+          {current.url ? <a href={current.url}>{current.company}</a> : current.company}
+        </h3>
+        <p class="role-meta">{current.role} · {current.dates}</p>
+      </div>
+    </div>
     {current.paragraphs?.map((paragraph) => <p class="role-summary">{paragraph}</p>)}
   </div>
 

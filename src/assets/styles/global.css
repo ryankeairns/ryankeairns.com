@@ -84,19 +84,30 @@ body::before {
     0 18px 48px rgba(0, 0, 0, 0.38);
 }
 
-.identity {
+.identity,
+.role-identity {
   display: flex;
   align-items: flex-start;
   gap: 1rem;
 }
 
+.portrait,
+.role-logo {
+  flex: none;
+  background: var(--art);
+}
+
 .portrait {
   width: 112px;
   height: 112px;
-  flex: none;
   border-radius: 16px;
   object-fit: cover;
-  background: var(--art);
+}
+
+.role-logo {
+  width: 56px;
+  height: auto;
+  border-radius: 8px;
 }
 
 .identity-text {

@@ -35,9 +35,9 @@ export const selectedWork: { area: string; description: string }[] = [
       'Design lead on Borealis, the latest theme for Elastic UI, and the precursor to that upgrade. A theme is the visual foundation every interface on the design system inherits, so a decision made once either resolves or repeats itself across the whole product surface.',
   },
   {
-    area: 'Prototyping in code',
+    area: 'Shared app header',
     description:
-      "Kibana's app headers and app menus had grown organically and was unlikely to clear the roadmap on discussion alone. I built a working redesign directly in a local instance in under a day, demoed it to the Platform team with a link for hands-on review, and it became the direction for planned development.",
+      "A single app header for the whole of Kibana, instead of each app inventing its own. I led the visual design and steered the API — limiting slots to specific content, placing global actions, and restricting the number and type of buttons. Prototyping in code was how I expressed that vision up front.",
   },
   {
     area: 'Agent Builder',
