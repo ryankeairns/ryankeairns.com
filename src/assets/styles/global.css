@@ -399,12 +399,13 @@ a.track:hover .track-title {
   font-size: 0.875rem;
 }
 
-@media (max-width: 640px) {
+@media (max-width: 800px) {
   body::after {
-    top: 1rem;
-    right: 1rem;
+    display: none;
   }
+}
 
+@media (max-width: 640px) {
   .page {
     margin: 1rem;
     padding: 2rem;
